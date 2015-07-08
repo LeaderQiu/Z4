@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PXSearchViewController"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PXSearchHistoryCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doA-7s-Zre">
+                        <rect key="frame" x="10" y="10" width="93" height="35"/>
+                        <state key="normal" title="Button" backgroundImage="热门搜索"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSr-kp-G8I">
+                        <rect key="frame" x="113" y="10" width="93" height="35"/>
+                        <state key="normal" title="Button" backgroundImage="热门搜索"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xfH-YP-0pE">
+                        <rect key="frame" x="217" y="10" width="93" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" title="Button" backgroundImage="热门搜索"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc0-vQ-6xm">
+                        <rect key="frame" x="10" y="55" width="93" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" title="Button" backgroundImage="热门搜索"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7p-um-3M1">
+                        <rect key="frame" x="113" y="55" width="93" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" title="Button" backgroundImage="热门搜索"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcX-ps-3mC">
+                        <rect key="frame" x="217" y="55" width="93" height="35"/>
+                        <state key="normal" title="Button" backgroundImage="热门搜索"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="height" secondItem="xfH-YP-0pE" secondAttribute="height" id="1ys-K2-DzM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="PcX-ps-3mC" secondAttribute="trailing" constant="2" id="Bcc-rM-fZM"/>
+                    <constraint firstItem="Kc0-vQ-6xm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="Gpd-q9-ISx"/>
+                    <constraint firstItem="PcX-ps-3mC" firstAttribute="leading" secondItem="t7p-um-3M1" secondAttribute="trailing" constant="11" id="Haq-ay-MPn"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="width" secondItem="t7p-um-3M1" secondAttribute="width" id="OhE-Ta-aFR"/>
+                    <constraint firstItem="hSr-kp-G8I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="Tco-Mt-vh7"/>
+                    <constraint firstItem="hSr-kp-G8I" firstAttribute="leading" secondItem="doA-7s-Zre" secondAttribute="trailing" constant="10" id="UMI-gS-S4v"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="width" secondItem="hSr-kp-G8I" secondAttribute="width" id="Wbc-oP-dsU"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="height" secondItem="hSr-kp-G8I" secondAttribute="height" id="Y4l-0a-z0H"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="height" secondItem="PcX-ps-3mC" secondAttribute="height" id="aUm-PH-5L1"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="cjq-oo-V9E"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Kc0-vQ-6xm" secondAttribute="bottom" constant="1" id="cqo-PP-07R"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="t7p-um-3M1" secondAttribute="bottom" constant="1" id="dfa-YY-76S"/>
+                    <constraint firstItem="t7p-um-3M1" firstAttribute="leading" secondItem="Kc0-vQ-6xm" secondAttribute="trailing" constant="10" id="f8I-9p-NcB"/>
+                    <constraint firstItem="xfH-YP-0pE" firstAttribute="leading" secondItem="hSr-kp-G8I" secondAttribute="trailing" constant="11" id="h0s-K6-CP0"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="width" secondItem="Kc0-vQ-6xm" secondAttribute="width" id="il8-Fl-mOM"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="width" secondItem="PcX-ps-3mC" secondAttribute="width" id="jZo-dm-6kQ"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="width" secondItem="xfH-YP-0pE" secondAttribute="width" id="jgV-N7-ZbE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="xfH-YP-0pE" secondAttribute="trailing" constant="2" id="lFu-j4-tK7"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PcX-ps-3mC" secondAttribute="bottom" constant="1" id="oaD-W8-Msu"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="height" secondItem="Kc0-vQ-6xm" secondAttribute="height" id="ofC-8k-BQj"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="height" secondItem="t7p-um-3M1" secondAttribute="height" id="stk-Dk-ty0"/>
+                    <constraint firstItem="doA-7s-Zre" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="uLP-5f-dMU"/>
+                    <constraint firstItem="xfH-YP-0pE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="wb8-I6-Ghz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="Btn1" destination="doA-7s-Zre" id="VjZ-vM-1MM"/>
+                <outlet property="Btn2" destination="hSr-kp-G8I" id="Sb3-qM-DiX"/>
+                <outlet property="Btn3" destination="xfH-YP-0pE" id="N2g-Xk-x3d"/>
+                <outlet property="Btn4" destination="Kc0-vQ-6xm" id="JPT-Ux-e2g"/>
+                <outlet property="Btn5" destination="t7p-um-3M1" id="JKP-hK-m7A"/>
+                <outlet property="Btn6" destination="PcX-ps-3mC" id="RV9-aa-U5M"/>
+            </connections>
+            <point key="canvasLocation" x="175" y="311"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="热门搜索" width="93" height="35"/>
+    </resources>
+</document>

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "scale" : "1x",
+      "filename" : "--现在有了众猎平台，--推荐人才不用东奔西走！--主要是有！钱！赚！-.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "--现在有了众猎平台，--推荐人才不用东奔西走！--主要是有！钱！赚！-@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "--现在有了众猎平台，--推荐人才不用东奔西走！--主要是有！钱！赚！-@3x.png"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
