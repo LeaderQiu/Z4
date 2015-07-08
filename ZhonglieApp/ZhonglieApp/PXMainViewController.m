@@ -169,7 +169,7 @@
     UITableView *SearchHistory = [[UITableView alloc]initWithFrame:CGRectMake(0,170 ,self.view.bounds.size.width, 10)];
     _SearchHistory = SearchHistory;
 
-    //网络请求职位数据
+    //网络请求职位列表数据
     [self setupHTTPData];
     
     //网络请求热搜数据
@@ -303,7 +303,7 @@
                                              @"school":@"北大",
                                              @"professional":@"软件工程",
                                              @"edu":@"2",
-                                             @"uid":@"1"
+                                             @"uid":@"2"
                                              
                                              },
                             @"company1":@{@"company_name":@"普信科技",
@@ -332,7 +332,7 @@
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"uid":@"1",
+    NSDictionary *pamas = @{@"uid":@"2",
                             @"resume_id":@"13",
                             @"resume_data":@{@"title":@"产品",
                                              @"name":@"小明明",
@@ -370,7 +370,7 @@
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"page":@"0",@"uid":@"1"};
+    NSDictionary *pamas = @{@"page":@"0",@"uid":@"2"};
     
     [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeList" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
@@ -623,11 +623,6 @@
     return YES;
 }
 
-////跳转回来的页面再次隐藏状态栏
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    self.navigationController.navigationBarHidden = YES;
-//}
 
 
 //设置TextField细节
@@ -681,20 +676,13 @@
     NSString *SearchText = [textField text];
     
     
-    _SearchText =SearchText;
+//    _SearchText =SearchText;
 
     
     NSLog(@"用户输入******%@",SearchText);
-    
+   
     [[NSUserDefaults standardUserDefaults]setObject:SearchText forKey:@"textFieldKey"];
-    
-
-  
-    
-    
-    
-    
-    
+ 
     //隐藏搜索历史
     self.SearchHistory.hidden = YES;
     
@@ -706,16 +694,43 @@
     
     PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
     
-//    [self presentViewController:SearchVC animated:YES completion:nil];
+    SearchVC.SearchText = SearchText;
     
     [self.navigationController pushViewController:SearchVC animated:YES];
-    
-    
-   
     
     return YES;
     
 }
+
+////文字搜索
+//-(void)setupTextSearchWithText:(NSString *)text
+//{
+//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//    
+//    NSDictionary *pamas = @{@"keywords":text,@"page":@"0"};
+//    
+//    NSLog(@"文字搜索的内容%@",text);
+//    
+//    [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        //
+//        NSLog(@"文字搜索成功==》%@",responseObject);
+//        NSArray *dictarray = [responseObject objectForKey:@"data"];
+//        NSMutableArray *tempArray = [NSMutableArray array];
+//        
+//        for (NSDictionary *dict in dictarray) {
+//            PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+//            
+//            [tempArray addObject:zhiwei];
+//            
+//        }
+//        [self.dataArray addObjectsFromArray:tempArray];
+//        
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        //
+//        NSLog(@"文字搜索失败==》%@",error);
+//    }];
+//}
 
 //加载搜索历史
 -(void)setupSearchHistory
@@ -725,8 +740,7 @@
     
     SearchHistory.delegate = self;
     SearchHistory.dataSource = self;
-    
-    
+   
     SearchHistory.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:SearchHistory];

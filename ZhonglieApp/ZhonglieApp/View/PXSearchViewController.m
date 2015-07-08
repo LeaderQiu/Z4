@@ -12,11 +12,21 @@
 #import "Masonry.h"
 #import "PXCityViewController.h"
 #import "UIColor+SYExtension.h"
+#import "AFNetworking.h"
+#import "MJExtension.h"
+#import "PXZhiWei.h"
+#import "PXMainViewController.h"
+
 
 
 @interface PXSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property(nonatomic,strong) UITableView *SearchV;
 @property(nonatomic,strong) UITextField *TextField;
+
+
+
+/**存放的职位列表模型数组*/
+@property(nonatomic,strong) NSMutableArray *dataArray;
 @end
 
 @implementation PXSearchViewController
@@ -37,11 +47,56 @@
    
     
     [self setupFirstV];
-
-   
     
     [self setupTableV];
+    
+    //进行文字搜索
+    [self setupTextSearchWithText:_SearchText];
+    
+    
 }
+/**
+ *  懒加载
+ */
+-(NSMutableArray *)dataArray
+{
+    if (_dataArray == nil) {
+        _dataArray = [[NSMutableArray alloc]init];
+    }
+    return _dataArray;
+}
+
+//文字搜索
+-(void)setupTextSearchWithText:(NSString *)text
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"keywords":text,@"page":@"0"};
+    
+    NSLog(@"文字搜索的内容%@",text);
+    
+    [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"文字搜索成功==》%@",responseObject);
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        for (NSDictionary *dict in dictarray) {
+            PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+            
+            [tempArray addObject:zhiwei];
+            
+        }
+        [self.dataArray addObjectsFromArray:tempArray];
+        [self.SearchV reloadData];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"文字搜索失败==》%@",error);
+    }];
+}
+
 
 //导航栏返回键
 -(void)btnClickAction
@@ -165,7 +220,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 10;
+    return self.dataArray.count;
 }
 
 //自定义Cell
@@ -175,9 +230,13 @@
     
     PXMainCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
+    PXZhiWei *zhiWei = self.dataArray[indexPath.row];
+    
     if (cell == nil) {
         cell = [[PXMainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
+    cell.zhiWei = zhiWei;
+    
     return cell;
 }
 

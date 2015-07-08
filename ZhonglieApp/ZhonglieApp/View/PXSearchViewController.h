@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PXSearchViewController : UIViewController
-
+/**
+ *  用户输入的搜索内容
+ */
+@property (nonatomic,copy) NSString *SearchText;
 @end
