@@ -79,6 +79,18 @@
         //
         NSLog(@"文字搜索成功==》%@",responseObject);
         NSArray *dictarray = [responseObject objectForKey:@"data"];
+        NSArray *codeArray = [responseObject objectForKey:@"code"];
+//        int code = (int)codeArray[0];
+        
+        
+        NSLog(@"文字搜索的code==》%@",codeArray);
+        
+        if ([codeArray[0] isEqualToString:@"1000"]) {
+            NSLog(@"搜索有误");
+
+        }
+        
+        
         NSMutableArray *tempArray = [NSMutableArray array];
         
         for (NSDictionary *dict in dictarray) {
