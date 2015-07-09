@@ -76,6 +76,7 @@
 		FD991CB31B258AC400E79F12 /* PXRunameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD991CB11B258AC400E79F12 /* PXRunameCell.m */; };
 		FD991CB41B258AC400E79F12 /* PXRunameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD991CB21B258AC400E79F12 /* PXRunameCell.xib */; };
 		FD991CB71B259F0200E79F12 /* PXRuname2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD991CB61B259F0200E79F12 /* PXRuname2ViewController.m */; };
+		FD9F8F331B4E240A00CAA1F4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9F8F321B4E240A00CAA1F4 /* MBProgressHUD.m */; };
 		FDAE211E1B3A661E00B53328 /* PXWanShanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAE211D1B3A661E00B53328 /* PXWanShanViewController.m */; };
 		FDB4CD141B42475600059FBF /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDB4CD101B42475600059FBF /* libWeChatSDK.a */; };
 		FDB4CD151B42475600059FBF /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDB4CD111B42475600059FBF /* read_me.txt */; };
@@ -253,6 +254,8 @@
 		FD991CB11B258AC400E79F12 /* PXRunameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRunameCell.m; sourceTree = "<group>"; };
 		FD991CB21B258AC400E79F12 /* PXRunameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXRunameCell.xib; sourceTree = "<group>"; };
 		FD991CB61B259F0200E79F12 /* PXRuname2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRuname2ViewController.m; sourceTree = "<group>"; };
+		FD9F8F311B4E240A00CAA1F4 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		FD9F8F321B4E240A00CAA1F4 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		FDAE211C1B3A661E00B53328 /* PXWanShanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXWanShanViewController.h; sourceTree = "<group>"; };
 		FDAE211D1B3A661E00B53328 /* PXWanShanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXWanShanViewController.m; sourceTree = "<group>"; };
 		FDB4CD101B42475600059FBF /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -447,6 +450,8 @@
 				FD4518AF1B1EAE3700A49D88 /* PXDataTools.m */,
 				FD4519001B1EE82000A49D88 /* UIColor+SYExtension.h */,
 				FD4519011B1EE82000A49D88 /* UIColor+SYExtension.m */,
+				FD9F8F311B4E240A00CAA1F4 /* MBProgressHUD.h */,
+				FD9F8F321B4E240A00CAA1F4 /* MBProgressHUD.m */,
 			);
 			name = Vender;
 			sourceTree = "<group>";
@@ -921,6 +926,7 @@
 				FD8203321B32760700894743 /* MASConstraint.m in Sources */,
 				FD3F89C81B3179CF002210A6 /* MJProperty.m in Sources */,
 				FD3F89CB1B3179CF002210A6 /* NSObject+MJKeyValue.m in Sources */,
+				FD9F8F331B4E240A00CAA1F4 /* MBProgressHUD.m in Sources */,
 				FD3F89A91B311FAF002210A6 /* AFHTTPRequestOperationManager.m in Sources */,
 				FD991CB31B258AC400E79F12 /* PXRunameCell.m in Sources */,
 				FD8203381B32760700894743 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

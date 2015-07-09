@@ -16,6 +16,7 @@
 #import "MJExtension.h"
 #import "PXZhiWei.h"
 #import "PXMainViewController.h"
+#import "MBProgressHUD.h"
 
 
 
@@ -83,6 +84,16 @@
         int code = [[responseObject objectForKey:@"code"] intValue];
         
         if (code != 1000) {
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此职位";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:2];
             
             NSLog(@"搜索有误");
             
