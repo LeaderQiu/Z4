@@ -79,29 +79,29 @@
         //
         NSLog(@"文字搜索成功==》%@",responseObject);
         NSArray *dictarray = [responseObject objectForKey:@"data"];
-        NSArray *codeArray = [responseObject objectForKey:@"code"];
-//        int code = (int)codeArray[0];
-        
-        
-        NSLog(@"文字搜索的code==》%@",codeArray);
-        
-        if ([codeArray[0] isEqualToString:@"1000"]) {
-            NSLog(@"搜索有误");
 
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                
+                [tempArray addObject:zhiwei];
+                
+            }
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.SearchV reloadData];
+            
         }
         
         
-        NSMutableArray *tempArray = [NSMutableArray array];
-        
-        for (NSDictionary *dict in dictarray) {
-            PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
-            
-            [tempArray addObject:zhiwei];
-            
-        }
-        [self.dataArray addObjectsFromArray:tempArray];
-        [self.SearchV reloadData];
-        
+    
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
