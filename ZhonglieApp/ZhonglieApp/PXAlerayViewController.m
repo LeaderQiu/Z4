@@ -23,6 +23,8 @@
 @property(nonatomic,strong) UIView *AlertV2;
 @property(nonatomic,strong) UIView *AlertV3;
 
+@property(nonatomic,strong) UIView *headerV;
+
 /**存放的模型数组*/
 @property(nonatomic,strong) NSMutableArray *dataArray;
 
@@ -62,17 +64,6 @@
         //成功的回调
         NSLog(@"已推荐列表成功==>%@",responseObject);
         
-//        NSArray *dictArray = [responseObject objectForKey:@"data"];
-//        NSMutableArray *tempArray = [NSMutableArray array];
-//        
-//        for (NSDictionary *dict in dictArray) {
-//            PXSearchLabel *Label = [PXSearchLabel objectWithKeyValues:dict];
-//            
-//            [tempArray addObject:Label];
-//        }
-//        
-//        [self.dataArray1 addObjectsFromArray:tempArray];
-//        [_SearchHistory reloadData];
         NSArray *dictArray = [responseObject objectForKey:@"data"];
         NSMutableArray *tempArray = [NSMutableArray array];
         
@@ -98,6 +89,8 @@
 {
   
     UIView *headerV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+    
+    _headerV = headerV;
     
     UIImageView *backImageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"头部背景"]];
 
@@ -184,19 +177,23 @@
     UIView *AlertV1 = [UIView new];
     
     _AlertV1 = AlertV1;
-    
+        
     UIImageView *backImage1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框1"]];
     
     [AlertV1 addSubview:backImage1];
   
     [self.view addSubview:AlertV1];
     
-    //AlertV1约束
+    //backImage约束
+    [backImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(AlertV1);
+    }];
     
+    //AlertV1约束
     [AlertV1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(10);
+        make.left.equalTo(self.view.mas_left).offset(10);
         make.top.equalTo(self.view.mas_top).offset(44);
-        make.right.equalTo(self.view).offset(-10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
         make.height.mas_equalTo(59);
     }];
 }
@@ -211,11 +208,16 @@
     
     _AlertV2 = AlertV2;
     
-    UIImageView *backImage1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框2"]];
+    UIImageView *backImage2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框2"]];
     
     
     [self.view addSubview:AlertV2];
-    [AlertV2 addSubview:backImage1];
+    [AlertV2 addSubview:backImage2];
+    
+    //backImage约束
+    [backImage2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(AlertV2);
+    }];
     
     //AlertV约束
     
@@ -226,12 +228,7 @@
         make.height.mas_equalTo(59);
     }];
     
-    //backImage约束
-    [backImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(AlertV2);
-        make.height.equalTo(AlertV2);
-        make.edges.equalTo(AlertV2).insets(UIEdgeInsetsMake(0, 0, 0, 0));
-    }];
+ 
 }
 
 //点击薪资待遇
@@ -249,24 +246,20 @@
     [AlertV3 addSubview:backImage1];
     [self.view addSubview:AlertV3];
     
-    
-    //AlertV约束
-    
-    [AlertV3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(10);
-        make.top.equalTo(self.view.mas_top).offset(44);
-        make.right.equalTo(self.view).offset(-10);
-        make.height.mas_equalTo(59);
-    }];
-    
-    //backImage约束
+    //给backImage1设置约束
     [backImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(10);
-        make.top.equalTo(self.view.mas_top).offset(44);
-        make.right.equalTo(self.view).offset(-10);
-        make.height.mas_equalTo(59);
-        make.width.mas_equalTo(300);
+        make.edges.equalTo(AlertV3);
     }];
+    
+    //给Alert3设置约束
+    [AlertV3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.top.equalTo(self.tableView.mas_top).offset(44);
+        make.height.mas_equalTo(51);
+    }];
+    
+
 }
 
 //点击空白 隐藏AlertV  （没什么用）

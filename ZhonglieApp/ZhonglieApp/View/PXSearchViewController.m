@@ -17,6 +17,7 @@
 #import "PXZhiWei.h"
 #import "PXMainViewController.h"
 #import "MBProgressHUD.h"
+#import "UIColor+SYExtension.h"
 
 
 
@@ -24,7 +25,9 @@
 @property(nonatomic,strong) UITableView *SearchV;
 @property(nonatomic,strong) UITextField *TextField;
 
-
+@property(nonatomic,strong) UIView *AlertV1;
+@property(nonatomic,strong) UIView *AlertV2;
+@property(nonatomic,strong) UIView *AlertV3;
 
 /**存放的职位列表模型数组*/
 @property(nonatomic,strong) NSMutableArray *dataArray;
@@ -85,7 +88,7 @@
         
         if (code != 1000) {
             
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             
             // Configure for text only and offset down
             hud.mode = MBProgressHUDModeText;
@@ -371,20 +374,137 @@
 -(void)FaBuClick
 {
     NSLog(@"点击了发布时间");
+    
+    UIView *Alert1 = [UIView new];
+    
+    _AlertV1 = Alert1;
+
+    UIImageView *backImage1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框左"]];
+    
+    UIButton *Btn1 = [UIButton new];
+    UIButton *Btn2 = [UIButton new];
+    UIButton *Btn3 = [UIButton new];
+    
+    Btn1.titleLabel.text = @"最近一周";
+    Btn1.titleLabel.text = @"近一个月";
+    Btn1.titleLabel.text = @"全部";
+    
+//    Btn1.titleLabel.textColor = [UIColor colorWithRGB:0x4f4f4f];
+    Btn1.titleLabel.textColor = [UIColor blackColor];
+    
+    Btn1.titleLabel.font = [UIFont systemFontOfSize:18];
+    
+   
+    
+    [Alert1 addSubview:backImage1];
+    
+    [Alert1 addSubview:Btn1];
+    [Alert1 addSubview:Btn2];
+    [Alert1 addSubview:Btn3];
+    
+    [Btn1 addTarget:self action:@selector(Btn1Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.SearchV addSubview:Alert1];
+    
+    //给backImage1设置约束
+    [backImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(Alert1);
+    }];
+    
+    //给Alert1设置约束
+    [Alert1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.top.equalTo(self.SearchV.mas_top).offset(46);
+        make.height.mas_equalTo(51);
+    }];
+    
+    //给Btn设置约束
+//    int padding1 = -(Alert1.bounds.size.width-240)/4;
+    
+//    NSLog(@"padding==>%d",padding1);
+    
+    [Btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(100);
+        make.left.equalTo(Alert1.mas_left).offset(20);
+        make.centerY.equalTo(Alert1);
+    }];
+}
+
+//
+-(void)Btn1Click
+{
+    NSLog(@"Btn1");
 }
 
 //点击发布时间按钮
 -(void)JiangLiClick
 {
-    NSLog(@"点击了奖励金额");
+  
+    NSLog(@"点击了发布时间");
+    
+    UIView *Alert2 = [UIView new];
+    
+    _AlertV2 = Alert2;
+    
+    UIImageView *backImage2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框中"]];
+    
+    [Alert2 addSubview:backImage2];
+    
+    
+    [self.SearchV addSubview:Alert2];
+    
+    //给backImage2设置约束
+    [backImage2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(Alert2);
+    }];
+    
+    //给Alert2设置约束
+    [Alert2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.top.equalTo(self.SearchV.mas_top).offset(44);
+        make.height.mas_equalTo(51);
+    }];
 }
 
-//点击发布时间按钮
+//点击更多筛选按钮
 -(void)GengDuoClick
 {
     NSLog(@"点击了更多筛选");
+    
+    UIView *Alert3 = [UIView new];
+    
+    _AlertV3 = Alert3;
+    
+    UIImageView *backImage3 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框右"]];
+    
+    [Alert3 addSubview:backImage3];
+    
+    
+    [self.SearchV addSubview:Alert3];
+    
+    //给backImage3设置约束
+    [backImage3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(Alert3);
+    }];
+    
+    //给Alert3设置约束
+    [Alert3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.top.equalTo(self.SearchV.mas_top).offset(44);
+        make.height.mas_equalTo(223);
+    }];
 }
 
+//屏幕滑动时隐藏Alert
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    self.AlertV1.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV3.hidden = YES;
+}
 
 //设置TextField细节
 -(void)setupTextFiel
@@ -432,14 +552,17 @@
     
     [textField resignFirstResponder];
     
-    textField.text = @" ";
+    [self setupTextSearchWithText:textField.text];
     
+    textField.text = @" ";
     
     [self updateViewConstraints];
     
     return YES;
     
 }
+
+
 
 //结束编辑时显示查找职位图片
 -(void)textFieldDidEndEditing:(UITextField *)textField
