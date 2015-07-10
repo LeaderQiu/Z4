@@ -24,10 +24,38 @@
 @interface PXSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property(nonatomic,strong) UITableView *SearchV;
 @property(nonatomic,strong) UITextField *TextField;
+//搜索栏用户输入的文字
+@property(nonatomic,copy) NSString *UserText;
+
+//用户选择的性别
+@property(nonatomic,copy) NSString *UserSex;
+
+//用户选择的薪资
+@property(nonatomic,copy) NSString *UserMany;
+
+//更多筛选的性别
+@property(nonatomic,copy) NSString* SexNumber;
 
 @property(nonatomic,strong) UIView *AlertV1;
 @property(nonatomic,strong) UIView *AlertV2;
 @property(nonatomic,strong) UIView *AlertV3;
+
+@property int i1;
+@property int i2;
+@property int i3;
+@property int i4;
+@property int i5;
+@property int i6;
+@property int i7;
+
+@property(nonatomic,strong) UIButton *Btn7;
+@property(nonatomic,strong) UIButton *Btn8;
+@property(nonatomic,strong) UIButton *Btn9;
+@property(nonatomic,strong) UIButton *Btn10;
+@property(nonatomic,strong) UIButton *Btn11;
+@property(nonatomic,strong) UIButton *Btn12;
+@property(nonatomic,strong) UIButton *Btn13;
+
 
 /**存放的职位列表模型数组*/
 @property(nonatomic,strong) NSMutableArray *dataArray;
@@ -461,7 +489,70 @@
     self.AlertV2.hidden = YES;
     self.AlertV1.hidden = YES;
     NSLog(@"Btn1");
-}
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    if (self.UserText == nil) {
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"对不起，目前没有此职位";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    }else{
+        NSDictionary *pamas = @{@"keywords":self.UserText,
+                                @"page":@"0",
+                                @"time":@"1"};
+        
+        [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"Btn1点击事件==》%@",responseObject);
+            
+            NSArray *dictarray = [responseObject objectForKey:@"data"];
+            
+            int code = [[responseObject objectForKey:@"code"] intValue];
+            
+            if (code != 1000) {
+                
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"对不起，目前没有此职位";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                
+                [hud hide:YES afterDelay:1];
+                
+                NSLog(@"搜索有误");
+                
+            }else{
+                NSMutableArray *tempArray = [NSMutableArray array];
+                
+                for (NSDictionary *dict in dictarray) {
+                    PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                    
+                    [tempArray addObject:zhiwei];
+                    
+                }
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:tempArray];
+                [self.SearchV reloadData];
+                
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSLog(@"Btn1点击事件失败==》%@",error);
+        }];
+
+    }
+    
+    }
 
 //Btn2点击事件
 -(void)Btn2Click
@@ -470,6 +561,70 @@
     self.AlertV2.hidden = YES;
     self.AlertV1.hidden = YES;
     NSLog(@"Btn2");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    if (self.UserText == nil) {
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"对不起，目前没有此职位";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    }else{
+        
+        NSDictionary *pamas = @{@"keywords":self.UserText,
+                                @"page":@"0",
+                                @"time":@"2"};
+        
+        [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"Btn2点击事件==》%@",responseObject);
+            
+            NSArray *dictarray = [responseObject objectForKey:@"data"];
+            
+            int code = [[responseObject objectForKey:@"code"] intValue];
+            
+            if (code != 1000) {
+                
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"对不起，目前没有此职位";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                
+                [hud hide:YES afterDelay:1];
+                
+                NSLog(@"搜索有误");
+                
+            }else{
+                NSMutableArray *tempArray = [NSMutableArray array];
+                
+                for (NSDictionary *dict in dictarray) {
+                    PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                    
+                    [tempArray addObject:zhiwei];
+                    
+                }
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:tempArray];
+                [self.SearchV reloadData];
+                
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSLog(@"Btn2点击事件失败==》%@",error);
+        }];
+
+    }
+    
 }
 
 //Btn3点击事件
@@ -479,6 +634,72 @@
     self.AlertV2.hidden = YES;
     self.AlertV1.hidden = YES;
     NSLog(@"Btn3");
+    
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    if (self.UserText == nil) {
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"对不起，目前没有此职位";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    }else{
+        
+        NSDictionary *pamas = @{@"keywords":self.UserText,
+                                @"page":@"0",
+                                @"time":@"3"};
+        
+        [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"Btn3点击事件==》%@",responseObject);
+            
+            NSArray *dictarray = [responseObject objectForKey:@"data"];
+            
+            int code = [[responseObject objectForKey:@"code"] intValue];
+            
+            if (code != 1000) {
+                
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"对不起，目前没有此职位";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                
+                [hud hide:YES afterDelay:1];
+                
+                NSLog(@"搜索有误");
+                
+            }else{
+                NSMutableArray *tempArray = [NSMutableArray array];
+                
+                for (NSDictionary *dict in dictarray) {
+                    PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                    
+                    [tempArray addObject:zhiwei];
+                    
+                }
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:tempArray];
+                [self.SearchV reloadData];
+                
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSLog(@"Btn3点击事件失败==》%@",error);
+        }];
+        
+    }
+    
+
 }
 
 //点击奖励金额按钮
@@ -571,6 +792,71 @@
     self.AlertV2.hidden = YES;
     self.AlertV1.hidden = YES;
     NSLog(@"Btn4");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    if (self.UserText == nil) {
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"对不起，目前没有此职位";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    }else{
+        
+        NSDictionary *pamas = @{@"keywords":self.UserText,
+                                @"page":@"0",
+                                @"reward":@"1"};
+        
+        [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"Btn4点击事件==》%@",responseObject);
+            
+            NSArray *dictarray = [responseObject objectForKey:@"data"];
+            
+            int code = [[responseObject objectForKey:@"code"] intValue];
+            
+            if (code != 1000) {
+                
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"对不起，目前没有此职位";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                
+                [hud hide:YES afterDelay:1];
+                
+                NSLog(@"搜索有误");
+                
+            }else{
+                NSMutableArray *tempArray = [NSMutableArray array];
+                
+                for (NSDictionary *dict in dictarray) {
+                    PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                    
+                    [tempArray addObject:zhiwei];
+                    
+                }
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:tempArray];
+                [self.SearchV reloadData];
+                
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSLog(@"Btn4点击事件失败==》%@",error);
+        }];
+        
+    }
+    
+
 }
 //Btn5点击事件
 -(void)Btn5Click
@@ -579,6 +865,72 @@
     self.AlertV2.hidden = YES;
     self.AlertV1.hidden = YES;
     NSLog(@"Btn5");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    if (self.UserText == nil) {
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"对不起，目前没有此职位";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    }else{
+        
+        NSDictionary *pamas = @{@"keywords":self.UserText,
+                                @"page":@"0",
+                                @"reward":@"2"};
+        
+        [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"Btn5点击事件==》%@",responseObject);
+            
+            NSArray *dictarray = [responseObject objectForKey:@"data"];
+            
+            int code = [[responseObject objectForKey:@"code"] intValue];
+            
+            if (code != 1000) {
+                
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"对不起，目前没有此职位";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                
+                [hud hide:YES afterDelay:1];
+                
+                NSLog(@"搜索有误");
+                
+            }else{
+                NSMutableArray *tempArray = [NSMutableArray array];
+                
+                for (NSDictionary *dict in dictarray) {
+                    PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                    
+                    [tempArray addObject:zhiwei];
+                    
+                }
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:tempArray];
+                [self.SearchV reloadData];
+                
+                
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSLog(@"Btn5点击事件失败==》%@",error);
+        }];
+        
+    }
+    
+
 }
 //Btn6点击事件
 -(void)Btn6Click
@@ -587,6 +939,71 @@
     self.AlertV2.hidden = YES;
     self.AlertV1.hidden = YES;
     NSLog(@"Btn6");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    if (self.UserText == nil) {
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"对不起，目前没有此职位";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    }else{
+        
+        NSDictionary *pamas = @{@"keywords":self.UserText,
+                                @"page":@"0",
+                                @"reward":@"3"};
+        
+        [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"Btn6点击事件==》%@",responseObject);
+            
+            NSArray *dictarray = [responseObject objectForKey:@"data"];
+            
+            int code = [[responseObject objectForKey:@"code"] intValue];
+            
+            if (code != 1000) {
+                
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"对不起，目前没有此职位";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                
+                [hud hide:YES afterDelay:1];
+                
+                NSLog(@"搜索有误");
+                
+            }else{
+                NSMutableArray *tempArray = [NSMutableArray array];
+                
+                for (NSDictionary *dict in dictarray) {
+                    PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                    
+                    [tempArray addObject:zhiwei];
+                    
+                }
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:tempArray];
+                [self.SearchV reloadData];
+                
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSLog(@"Btn6点击事件失败==》%@",error);
+        }];
+        
+    }
+    
+
 }
 
 
@@ -628,6 +1045,14 @@
     UIButton *Btn12 = [UIButton buttonWithType:UIButtonTypeCustom];
     UIButton *Btn13 = [UIButton buttonWithType:UIButtonTypeCustom];
     UIButton *Btn14 = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    _Btn7 = Btn7;
+    _Btn8 = Btn8;
+    _Btn9 = Btn9;
+    _Btn10 = Btn10;
+    _Btn11 = Btn11;
+    _Btn12 = Btn12;
+    _Btn13 = Btn13;
     
     
     [Btn7 setTitle:@"男" forState:UIControlStateNormal];
@@ -822,58 +1247,222 @@
 //Btn7点击事件
 -(void)Btn7Click
 {
-    self.AlertV3.hidden = YES;
-    self.AlertV2.hidden = YES;
-    self.AlertV1.hidden = YES;
+
     NSLog(@"Btn7");
+    
+   
+    if (_i1%2 == 1) {
+        NSLog(@"管用1111");
+
+        
+        [self.Btn7 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+        
+        self.Btn8.userInteractionEnabled = YES;
+        
+        
+        
+    }else{
+        NSLog(@"管用2222");
+
+        [self.Btn7 setTitleColor:[UIColor colorWithRGB:0x228ED3] forState:UIControlStateNormal];
+        
+        self.Btn8.userInteractionEnabled = NO;
+        
+        _UserSex = @"1";
+    }
+    _i1++;
+    
+    
+    
 }
 //Btn8点击事件
 -(void)Btn8Click
 {
-    self.AlertV3.hidden = YES;
-    self.AlertV2.hidden = YES;
-    self.AlertV1.hidden = YES;
+
     NSLog(@"Btn8");
+   
+    if (_i2%2 == 1) {
+        NSLog(@"管用1111");
+        
+        
+        [self.Btn8 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+        
+        self.Btn7.userInteractionEnabled = YES;
+        
+       
+        
+    }else{
+        NSLog(@"管用2222");
+        
+        [self.Btn8 setTitleColor:[UIColor colorWithRGB:0x228ED3] forState:UIControlStateNormal];
+        
+        self.Btn7.userInteractionEnabled = NO;
+        
+        _UserSex = @"0";
+    }
+    _i2++;
+    
 }
 //Btn9点击事件
 -(void)Btn9Click
 {
-    self.AlertV3.hidden = YES;
-    self.AlertV2.hidden = YES;
-    self.AlertV1.hidden = YES;
+
     NSLog(@"Btn9");
+    
+    if (_i3%2 == 1) {
+        NSLog(@"管用1111");
+        
+        
+        [self.Btn9 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+        
+        self.Btn10.userInteractionEnabled = YES;
+        self.Btn11.userInteractionEnabled = YES;
+        self.Btn12.userInteractionEnabled = YES;
+        self.Btn13.userInteractionEnabled = YES;
+        
+        
+        
+        
+    }else{
+        NSLog(@"管用2222");
+        
+        [self.Btn9 setTitleColor:[UIColor colorWithRGB:0x228ED3] forState:UIControlStateNormal];
+        
+        self.Btn10.userInteractionEnabled = NO;
+        self.Btn11.userInteractionEnabled = NO;
+        self.Btn12.userInteractionEnabled = NO;
+        self.Btn13.userInteractionEnabled = NO;
+        
+        _UserMany = @"1";
+ 
+    }
+    _i3++;
+    
 }
 //Btn10点击事件
 -(void)Btn10Click
 {
-    self.AlertV3.hidden = YES;
-    self.AlertV2.hidden = YES;
-    self.AlertV1.hidden = YES;
+
     NSLog(@"Btn10");
+    
+    if (_i4%2 == 1) {
+        NSLog(@"管用1111");
+        
+        
+        [self.Btn10 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = YES;
+        self.Btn11.userInteractionEnabled = YES;
+        self.Btn12.userInteractionEnabled = YES;
+        self.Btn13.userInteractionEnabled = YES;
+        
+    }else{
+        NSLog(@"管用2222");
+        
+        [self.Btn10 setTitleColor:[UIColor colorWithRGB:0x228ED3] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = NO;
+        self.Btn11.userInteractionEnabled = NO;
+        self.Btn12.userInteractionEnabled = NO;
+        self.Btn13.userInteractionEnabled = NO;
+        
+        _UserMany = @"2";
+    }
+    _i4++;
 }
 //Btn11点击事件
 -(void)Btn11Click
 {
-    self.AlertV3.hidden = YES;
-    self.AlertV2.hidden = YES;
-    self.AlertV1.hidden = YES;
+
     NSLog(@"Btn11");
+    
+    if (_i5%2 == 1) {
+        NSLog(@"管用1111");
+        
+        
+        [self.Btn11 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = YES;
+        self.Btn10.userInteractionEnabled = YES;
+        self.Btn12.userInteractionEnabled = YES;
+        self.Btn13.userInteractionEnabled = YES;
+
+        
+    }else{
+        NSLog(@"管用2222");
+        
+        [self.Btn11 setTitleColor:[UIColor colorWithRGB:0x228ED3] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = NO;
+        self.Btn10.userInteractionEnabled = NO;
+        self.Btn12.userInteractionEnabled = NO;
+        self.Btn13.userInteractionEnabled = NO;
+        
+        _UserMany = @"3";
+    }
+    _i5++;
 }
 //Btn12点击事件
 -(void)Btn12Click
 {
-    self.AlertV3.hidden = YES;
-    self.AlertV2.hidden = YES;
-    self.AlertV1.hidden = YES;
+
     NSLog(@"Btn12");
+    
+    if (_i6%2 == 1) {
+        NSLog(@"管用1111");
+        
+        
+        [self.Btn12 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = YES;
+        self.Btn10.userInteractionEnabled = YES;
+        self.Btn11.userInteractionEnabled = YES;
+        self.Btn13.userInteractionEnabled = YES;
+        
+    }else{
+        NSLog(@"管用2222");
+        
+        [self.Btn12 setTitleColor:[UIColor colorWithRGB:0x228ED3] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = NO;
+        self.Btn10.userInteractionEnabled = NO;
+        self.Btn11.userInteractionEnabled = NO;
+        self.Btn13.userInteractionEnabled = NO;
+        
+        _UserMany = @"4";
+    }
+    _i6++;
 }
 //Btn13点击事件
 -(void)Btn13Click
 {
-    self.AlertV3.hidden = YES;
-    self.AlertV2.hidden = YES;
-    self.AlertV1.hidden = YES;
+
     NSLog(@"Btn13");
+    
+    if (_i7%2 == 1) {
+        NSLog(@"管用1111");
+        
+        
+        [self.Btn13 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = YES;
+        self.Btn10.userInteractionEnabled = YES;
+        self.Btn11.userInteractionEnabled = YES;
+        self.Btn12.userInteractionEnabled = YES;
+        
+    }else{
+        NSLog(@"管用2222");
+        
+        [self.Btn13 setTitleColor:[UIColor colorWithRGB:0x228ED3] forState:UIControlStateNormal];
+        
+        self.Btn9.userInteractionEnabled = NO;
+        self.Btn10.userInteractionEnabled = NO;
+        self.Btn11.userInteractionEnabled = NO;
+        self.Btn12.userInteractionEnabled = NO;
+        
+        _UserMany = @"5";
+    }
+    _i7++;
 }
 //Btn14点击事件
 -(void)Btn14Click
@@ -882,6 +1471,99 @@
     self.AlertV2.hidden = YES;
     self.AlertV1.hidden = YES;
     NSLog(@"Btn14");
+    
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    if (self.UserText == nil) {
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"对不起，目前没有此职位";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    }else if(self.UserMany == nil){
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"请选择薪资范围";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+    
+    }else if(self.UserSex == nil){
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"请选择候选人性别";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+        
+    }else{
+        
+        NSDictionary *pamas = @{@"keywords":self.UserText,
+                                @"page":@"0",
+                                @"rewards":_UserMany,
+                                @"sex":_UserSex
+                                };
+        
+        
+        [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"Btn14点击事件==》%@",responseObject);
+            
+            NSArray *dictarray = [responseObject objectForKey:@"data"];
+            
+            int code = [[responseObject objectForKey:@"code"] intValue];
+            
+            if (code != 1000) {
+                
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"对不起，目前没有此职位";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                
+                [hud hide:YES afterDelay:1];
+                
+                NSLog(@"搜索有误");
+                
+            }else{
+                NSMutableArray *tempArray = [NSMutableArray array];
+                
+                for (NSDictionary *dict in dictarray) {
+                    PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
+                    
+                    [tempArray addObject:zhiwei];
+                    
+                }
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:tempArray];
+                [self.SearchV reloadData];
+                
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSLog(@"Btn14点击事件失败==》%@",error);
+        }];
+        
+    }
+    
+
 }
 
 
@@ -938,6 +1620,7 @@
 {
     
     [textField resignFirstResponder];
+    _UserText = textField.text;
     
     [self setupTextSearchWithText:textField.text];
     

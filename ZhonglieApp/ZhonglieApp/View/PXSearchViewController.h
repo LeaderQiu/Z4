@@ -13,4 +13,6 @@
  *  用户输入的搜索内容
  */
 @property (nonatomic,copy) NSString *SearchText;
+
+
 @end
