@@ -20,6 +20,7 @@
 #import "UIColor+SYExtension.h"
 #import "PXSearchLabel.h"
 #import "PXSearchHistoryCell.h"
+#import "MBProgressHUD.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -330,37 +331,58 @@
 //网络接口测试
 -(void)setupText
 {
+    
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"uid":@"2",
-                            @"resume_id":@"13",
-                            @"resume_data":@{@"title":@"产品",
-                                             @"name":@"小明明",
-                                             @"sex":@"1",
-                                             @"age":@"18",
-                                             @"mobile":@"120",
-                                             @"school":@"北大",
-                                             @"professional":@"软件工程",
-                                             @"edu":@"2"
-                                    
-                                              },
-                            @"company1":@{@"company_name":@"普信科技",
-                                          @"duty":@"技术总监",
-                                          @"time":@"2年",
-                                          @"assess":@"哈哈哈哈哈哈哈"
-                                    
-                                    }
-                            };
+    NSDictionary *pamas = @{@"keywords":@"A",
+                            @"page":@"0",
+                            @"uid":@"2"};
     
+//    NSLog(@"简历文字搜索的内容%@",text);
     
-    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeEditDo" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:UrlStrResumeSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
-        
-        NSLog(@"接口测试成功==》%@",responseObject);
+        NSLog(@"简历搜索成功==》%@",responseObject);
+//        NSArray *dict = [responseObject objectForKey:@"data"];
+//        
+//        int code = [[responseObject objectForKey:@"code"] intValue];
+//        
+//        if (code != 1000) {
+//            
+//            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+//            
+//            // Configure for text only and offset down
+//            hud.mode = MBProgressHUDModeText;
+//            hud.labelText = @"对不起，目前没有此简历";
+//            hud.margin = 10.f;
+//            hud.removeFromSuperViewOnHide = YES;
+//            
+//            [hud hide:YES afterDelay:1];
+//            
+//            NSLog(@"搜索有误");
+//            
+//        }else{
+//            NSMutableArray *tempArray = [NSMutableArray array];
+//            
+//            for (NSDictionary *dictArray in dict) {
+//                PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
+//                
+//                [tempArray addObject:Runame];
+//                
+//            }
+//            
+//            [self.dataArray removeAllObjects];
+//            [self.dataArray addObjectsFromArray:tempArray];
+//            [self.tableV reloadData];
+//            
+//        }
+//        
+//        
+//        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        NSLog(@"接口测试失败==>%@",error);
+        NSLog(@"简历搜索失败==》%@",error);
     }];
 }
 

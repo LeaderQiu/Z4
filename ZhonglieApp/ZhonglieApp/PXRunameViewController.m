@@ -15,6 +15,8 @@
 #import "AFNetworking.h"
 #import "PXRuname.h"
 #import "MJExtension.h"
+#import "MBProgressHUD.h"
+
 
 
 @interface PXRunameViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -22,6 +24,8 @@
 @property(nonatomic,strong) UITextField *TextField;
 
 @property(nonatomic,strong) UITableView *tableV;
+
+@property(nonatomic,copy) NSString *UserText;
 
 
 //存放的模型数组
@@ -167,16 +171,77 @@
 {
     [self.TextField resignFirstResponder];
     
+    
     self.TextField.text = @" ";
 }
 
-
+#warning TODO 待测
+//文字搜索
+-(void)setupTextSearchWithText:(NSString *)text
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"keywords":text,
+                            @"page":@"0",
+                            @"uid":@"3"};
+    
+    NSLog(@"简历文字搜索的内容%@",text);
+    
+    [mgr POST:UrlStrResumeSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"简历搜索成功==》%@",responseObject);
+        NSArray *dict = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dictArray in dict) {
+                PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
+                
+                [tempArray addObject:Runame];
+                
+            }
+            
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableV reloadData];
+            
+        }
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"简历搜索失败==》%@",error);
+    }];
+}
 
 //点击键盘搜索键，收回键盘.***跳转页面****
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     
     [textField resignFirstResponder];
+    
+    self.UserText = self.TextField.text;
+    
+    [self setupTextSearchWithText:_UserText];
     
     textField.text = @" ";
     
