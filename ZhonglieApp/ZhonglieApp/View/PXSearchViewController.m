@@ -1596,7 +1596,7 @@
     
     self.TextField.userInteractionEnabled = YES;
     
-    self.TextField.textColor = [UIColor whiteColor];
+    self.TextField.textColor = [UIColor blackColor];
     
     self.TextField.clearsOnBeginEditing = YES;
     
