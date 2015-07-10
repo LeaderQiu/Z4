@@ -96,7 +96,7 @@
             hud.margin = 10.f;
             hud.removeFromSuperViewOnHide = YES;
             
-            [hud hide:YES afterDelay:2];
+            [hud hide:YES afterDelay:1];
             
             NSLog(@"搜索有误");
             
@@ -373,6 +373,8 @@
 //点击发布时间按钮
 -(void)FaBuClick
 {
+    self.AlertV2.hidden = YES;
+    self.AlertV3.hidden = YES;
     NSLog(@"点击了发布时间");
     
     UIView *Alert1 = [UIView new];
@@ -381,18 +383,23 @@
 
     UIImageView *backImage1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框左"]];
     
-    UIButton *Btn1 = [UIButton new];
-    UIButton *Btn2 = [UIButton new];
-    UIButton *Btn3 = [UIButton new];
+    UIButton *Btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    Btn1.titleLabel.text = @"最近一周";
-    Btn1.titleLabel.text = @"近一个月";
-    Btn1.titleLabel.text = @"全部";
+
+    [Btn1 setTitle:@"最近一周" forState:UIControlStateNormal];
+    [Btn2 setTitle:@"近一个月" forState:UIControlStateNormal];
+    [Btn3 setTitle:@"全部" forState:UIControlStateNormal];
+
     
-//    Btn1.titleLabel.textColor = [UIColor colorWithRGB:0x4f4f4f];
-    Btn1.titleLabel.textColor = [UIColor blackColor];
+    [Btn1 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn2 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn3 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
     
     Btn1.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn2.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn3.titleLabel.font = [UIFont systemFontOfSize:18];
     
    
     
@@ -403,6 +410,10 @@
     [Alert1 addSubview:Btn3];
     
     [Btn1 addTarget:self action:@selector(Btn1Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    [Btn2 addTarget:self action:@selector(Btn2Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    [Btn3 addTarget:self action:@selector(Btn3Click) forControlEvents:UIControlEventTouchUpInside];
     
     [self.SearchV addSubview:Alert1];
     
@@ -420,27 +431,61 @@
     }];
     
     //给Btn设置约束
-//    int padding1 = -(Alert1.bounds.size.width-240)/4;
+    int padding1 = (self.view.bounds.size.width-240)/4;
     
-//    NSLog(@"padding==>%d",padding1);
+    NSLog(@"padding==>%d",padding1);
     
     [Btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(100);
-        make.left.equalTo(Alert1.mas_left).offset(20);
-        make.centerY.equalTo(Alert1);
+        make.width.mas_equalTo(80);
+        make.left.equalTo(Alert1.mas_left).offset(padding1);
+        make.centerY.equalTo(Alert1.mas_centerY).offset(5);
+    }];
+    
+    [Btn2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.left.equalTo(Btn1.mas_right).offset(padding1);
+        make.centerY.equalTo(Alert1.mas_centerY).offset(5);
+    }];
+    
+    [Btn3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.left.equalTo(Btn2.mas_right).offset(padding1);
+        make.centerY.equalTo(Alert1.mas_centerY).offset(5);
     }];
 }
 
-//
+//Btn1点击事件
 -(void)Btn1Click
 {
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
     NSLog(@"Btn1");
 }
 
-//点击发布时间按钮
+//Btn2点击事件
+-(void)Btn2Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn2");
+}
+
+//Btn3点击事件
+-(void)Btn3Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn3");
+}
+
+//点击奖励金额按钮
 -(void)JiangLiClick
 {
-  
+    self.AlertV1.hidden = YES;
+    self.AlertV3.hidden = YES;
     NSLog(@"点击了发布时间");
     
     UIView *Alert2 = [UIView new];
@@ -449,28 +494,108 @@
     
     UIImageView *backImage2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框中"]];
     
+    UIButton *Btn4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn5 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn6 = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    
+    [Btn4 setTitle:@"由高到低" forState:UIControlStateNormal];
+    [Btn5 setTitle:@"由低到高" forState:UIControlStateNormal];
+    [Btn6 setTitle:@"全部" forState:UIControlStateNormal];
+    
+    
+    [Btn4 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn5 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn6 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    
+    Btn4.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn5.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn6.titleLabel.font = [UIFont systemFontOfSize:18];
+    
+    
+    
     [Alert2 addSubview:backImage2];
     
+    [Alert2 addSubview:Btn4];
+    [Alert2 addSubview:Btn5];
+    [Alert2 addSubview:Btn6];
+    
+    [Btn4 addTarget:self action:@selector(Btn4Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    [Btn5 addTarget:self action:@selector(Btn5Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    [Btn6 addTarget:self action:@selector(Btn6Click) forControlEvents:UIControlEventTouchUpInside];
     
     [self.SearchV addSubview:Alert2];
     
-    //给backImage2设置约束
+    //给backImage1设置约束
     [backImage2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(Alert2);
     }];
     
-    //给Alert2设置约束
+    //给Alert1设置约束
     [Alert2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(10);
         make.right.equalTo(self.view.mas_right).offset(-10);
-        make.top.equalTo(self.SearchV.mas_top).offset(44);
+        make.top.equalTo(self.SearchV.mas_top).offset(46);
         make.height.mas_equalTo(51);
     }];
+    
+    //给Btn设置约束
+    int padding1 = (self.view.bounds.size.width-240)/4;
+    
+    NSLog(@"padding==>%d",padding1);
+    
+    [Btn4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.left.equalTo(Alert2.mas_left).offset(padding1);
+        make.centerY.equalTo(Alert2.mas_centerY).offset(5);
+    }];
+    
+    [Btn5 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.left.equalTo(Btn4.mas_right).offset(padding1);
+        make.centerY.equalTo(Alert2.mas_centerY).offset(5);
+    }];
+    
+    [Btn6 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.left.equalTo(Btn5.mas_right).offset(padding1);
+        make.centerY.equalTo(Alert2.mas_centerY).offset(5);
+    }];}
+
+//Btn4点击事件
+-(void)Btn4Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn4");
 }
+//Btn5点击事件
+-(void)Btn5Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn5");
+}
+//Btn6点击事件
+-(void)Btn6Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn6");
+}
+
+
 
 //点击更多筛选按钮
 -(void)GengDuoClick
 {
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
     NSLog(@"点击了更多筛选");
     
     UIView *Alert3 = [UIView new];
@@ -479,7 +604,107 @@
     
     UIImageView *backImage3 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框右"]];
     
+    //创建性别Label
+    UILabel *SexLabel = [UILabel new];
+    SexLabel.text = @"性别";
+    SexLabel.textColor = [UIColor colorWithRGB:0x4f4f4f];
+    SexLabel.font = [UIFont systemFontOfSize:18];
+    
+    //创建推荐奖励Label
+    UILabel *TJLabel = [UILabel new];
+    TJLabel.text = @"推荐奖励";
+    TJLabel.textColor = [UIColor colorWithRGB:0x4f4f4f];
+    TJLabel.font = [UIFont systemFontOfSize:18];
+    
+    //创建分割线
+    UIView *backV = [UIView new];
+    backV.backgroundColor = [UIColor colorWithRGB:0xcfcfcf];
+    
+    UIButton *Btn7 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn8 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn9 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn10 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn11 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn12 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn13 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *Btn14 = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    
+    [Btn7 setTitle:@"男" forState:UIControlStateNormal];
+    [Btn8 setTitle:@"女" forState:UIControlStateNormal];
+    [Btn9 setTitle:@"1000-3000" forState:UIControlStateNormal];
+    [Btn10 setTitle:@"3000-8000" forState:UIControlStateNormal];
+    [Btn11 setTitle:@"8000-15000" forState:UIControlStateNormal];
+    [Btn12 setTitle:@"15000-30000" forState:UIControlStateNormal];
+    [Btn13 setTitle:@"30000以上" forState:UIControlStateNormal];
+    [Btn14 setTitle:@"确认" forState:UIControlStateNormal];
+    
+    Btn7.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    Btn8.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    Btn9.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    Btn10.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    Btn11.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    Btn12.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    Btn13.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+ 
+    
+    [Btn14 setBackgroundImage:[UIImage imageNamed:@"弹出框右按钮"] forState:UIControlStateNormal];
+    
+    
+    [Btn7 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn8 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn9 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn10 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn11 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn12 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+    [Btn13 setTitleColor:[UIColor colorWithRGB:0x4f4f4f] forState:UIControlStateNormal];
+
+    
+    Btn7.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn8.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn9.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn10.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn11.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn12.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn13.titleLabel.font = [UIFont systemFontOfSize:18];
+    Btn14.titleLabel.font = [UIFont systemFontOfSize:18];
+    
+    
+    
     [Alert3 addSubview:backImage3];
+    
+    [Alert3 addSubview:Btn7];
+    [Alert3 addSubview:Btn8];
+    [Alert3 addSubview:Btn9];
+    [Alert3 addSubview:Btn10];
+    [Alert3 addSubview:Btn11];
+    [Alert3 addSubview:Btn12];
+    [Alert3 addSubview:Btn13];
+    [Alert3 addSubview:Btn14];
+    [Alert3 addSubview:SexLabel];
+    [Alert3 addSubview:TJLabel];
+    [Alert3 addSubview:backV];
+    
+    [Btn7 addTarget:self action:@selector(Btn7Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    [Btn8 addTarget:self action:@selector(Btn8Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    [Btn9 addTarget:self action:@selector(Btn9Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [Btn10 addTarget:self action:@selector(Btn10Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [Btn11 addTarget:self action:@selector(Btn11Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [Btn12 addTarget:self action:@selector(Btn12Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [Btn13 addTarget:self action:@selector(Btn13Click) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [Btn14 addTarget:self action:@selector(Btn14Click) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.SearchV addSubview:Alert3];
@@ -493,10 +718,172 @@
     [Alert3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(10);
         make.right.equalTo(self.view.mas_right).offset(-10);
-        make.top.equalTo(self.SearchV.mas_top).offset(44);
+        make.top.equalTo(self.SearchV.mas_top).offset(46);
         make.height.mas_equalTo(223);
     }];
+    
+    //设置约束
+    int padding1 = (self.view.bounds.size.width-240)/4;
+    int padding2 = (self.view.bounds.size.width-200)/3-10;
+    
+    NSLog(@"padding1==>%d",padding1);
+    NSLog(@"padding2==>%d",padding2);
+    
+    //性别
+    [SexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(padding1);
+        make.width.mas_equalTo(80);
+        make.top.equalTo(Alert3.mas_top).offset(20);
+    }];
+    
+    //男
+    [Btn7 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.left.equalTo(SexLabel.mas_right).offset(padding1);
+        make.centerY.equalTo(SexLabel);
+    }];
+    
+    //女
+    [Btn8 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.left.equalTo(Btn7.mas_right).offset(padding1);
+        make.centerY.equalTo(SexLabel);
+    }];
+    
+    //确定
+    [Btn14 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(38);
+        make.width.equalTo(Alert3);
+        make.bottom.equalTo(Alert3);
+        make.centerX.equalTo(Alert3);
+    }];
+    
+    //分割线
+    [backV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(1);
+        make.left.equalTo(Alert3.mas_left).offset(20);
+        make.right.equalTo(Alert3.mas_right).offset(-20);
+        make.top.equalTo(SexLabel.mas_bottom).offset(10);
+    }];
+    
+    //推荐奖励
+    [TJLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(80);
+        make.top.equalTo(backV).offset(10);
+        make.left.equalTo(SexLabel.mas_left);
+    }];
+    
+    //1000-3000
+    [Btn9 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(100);
+        make.left.equalTo(Alert3.mas_left).offset(padding2);
+        make.top.equalTo(TJLabel.mas_bottom).offset(10);
+        make.height.mas_equalTo(20);
+    }];
+    
+    //3000-8000
+    [Btn10 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(120);
+        make.right.equalTo(Alert3.mas_right).offset(-padding2);
+        make.top.equalTo(TJLabel.mas_bottom).offset(10);
+        make.height.mas_equalTo(20);
+    }];
+    
+    //8000-15000
+    [Btn11 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(100);
+        make.left.equalTo(Alert3.mas_left).offset(padding2);
+        make.top.equalTo(Btn9.mas_bottom).offset(10);
+        make.height.mas_equalTo(20);
+    }];
+
+    //15000-30000
+    [Btn12 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(120);
+        make.right.equalTo(Alert3.mas_right).offset(-padding2);
+        make.top.equalTo(Btn10.mas_bottom).offset(10);
+        make.height.mas_equalTo(20);
+    }];
+    
+    //30000以上
+    [Btn13 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(100);
+        make.left.equalTo(Alert3.mas_left).offset(padding2);
+        make.top.equalTo(Btn11.mas_bottom).offset(10);
+        make.height.mas_equalTo(20);
+    }];
+    
+    
+    
+    
+
 }
+
+//Btn7点击事件
+-(void)Btn7Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn7");
+}
+//Btn8点击事件
+-(void)Btn8Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn8");
+}
+//Btn9点击事件
+-(void)Btn9Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn9");
+}
+//Btn10点击事件
+-(void)Btn10Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn10");
+}
+//Btn11点击事件
+-(void)Btn11Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn11");
+}
+//Btn12点击事件
+-(void)Btn12Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn12");
+}
+//Btn13点击事件
+-(void)Btn13Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn13");
+}
+//Btn14点击事件
+-(void)Btn14Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn14");
+}
+
 
 //屏幕滑动时隐藏Alert
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
