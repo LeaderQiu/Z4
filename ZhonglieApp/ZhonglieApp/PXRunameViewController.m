@@ -19,7 +19,7 @@
 
 
 
-@interface PXRunameViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface PXRunameViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,strong) UITextField *TextField;
 
@@ -149,7 +149,7 @@
     
     self.TextField.userInteractionEnabled = YES;
     
-    self.TextField.textColor = [UIColor whiteColor];
+    self.TextField.textColor = [UIColor blackColor];
     
     self.TextField.clearsOnBeginEditing = YES;
     
@@ -175,7 +175,7 @@
     self.TextField.text = @" ";
 }
 
-#warning TODO 待测
+
 //文字搜索
 -(void)setupTextSearchWithText:(NSString *)text
 {

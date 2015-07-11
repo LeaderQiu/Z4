@@ -183,13 +183,13 @@
     [self setuppositionContent];
     
     //网络接口测试
-//    [self setupText];
+    [self setupText];
     
     //网络测试简历Add
     [self setupAdd];
     
     //网络测试order接口
-//    [self setupOrder];
+    [self setupOrder];
     
     //网络测试orderList
     [self setupOrderList];
@@ -334,55 +334,21 @@
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"keyword":@"产品",
-                            @"page":@"0",
-                            @"uid":@"2"};
+    NSDictionary *pamas = @{@"user_info":@{@"uid":@"2",
+                                           @"field":@"mobile",
+                                           @"user_content":@"110"
+                                           
+                                    }};
     
-//    NSLog(@"简历文字搜索的内容%@",text);
+    NSLog(@"接口测试的参数%@",pamas);
     
-    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeSearch" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:@"http://123.57.147.235/index.php/home/user/userEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
-        NSLog(@"简历搜索成功==》%@",responseObject);
-//        NSArray *dict = [responseObject objectForKey:@"data"];
-//        
-//        int code = [[responseObject objectForKey:@"code"] intValue];
-//        
-//        if (code != 1000) {
-//            
-//            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-//            
-//            // Configure for text only and offset down
-//            hud.mode = MBProgressHUDModeText;
-//            hud.labelText = @"对不起，目前没有此简历";
-//            hud.margin = 10.f;
-//            hud.removeFromSuperViewOnHide = YES;
-//            
-//            [hud hide:YES afterDelay:1];
-//            
-//            NSLog(@"搜索有误");
-//            
-//        }else{
-//            NSMutableArray *tempArray = [NSMutableArray array];
-//            
-//            for (NSDictionary *dictArray in dict) {
-//                PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
-//                
-//                [tempArray addObject:Runame];
-//                
-//            }
-//            
-//            [self.dataArray removeAllObjects];
-//            [self.dataArray addObjectsFromArray:tempArray];
-//            [self.tableV reloadData];
-//            
-//        }
-//        
-//        
-//        
+        NSLog(@"接口测试成功==》%@",responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        NSLog(@"简历搜索失败==》%@",error);
+        NSLog(@"接口测试失败==》%@",error);
     }];
 }
 
