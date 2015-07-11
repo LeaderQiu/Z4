@@ -181,13 +181,13 @@
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"keywords":text,
+    NSDictionary *pamas = @{@"keyword":text,
                             @"page":@"0",
-                            @"uid":@"3"};
+                            @"uid":@"2"};
     
     NSLog(@"简历文字搜索的内容%@",text);
     
-    [mgr POST:UrlStrResumeSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeSearch" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         NSLog(@"简历搜索成功==》%@",responseObject);
         NSArray *dict = [responseObject objectForKey:@"data"];

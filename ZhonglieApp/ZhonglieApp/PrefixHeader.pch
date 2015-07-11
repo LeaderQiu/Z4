@@ -31,7 +31,7 @@
 #define UrlStrPositionSearch @"http://123.57.147.235/index.php/home/position/positionSearch"
 
 //文字搜索简历 uid keyword
-#define UrlStrResumeSearch @"http://123.57.147.235/index.php/home/resume/resumeEdit"
+#define UrlStrResumeSearch @"http://123.57.147.235/index.php/home/resume/resumeSearch"
 
 //简历修改内容提交
 #define UrlStrResumeEditDo @"http://123.57.147.235/index.php/home/resume/resumeEditDo"

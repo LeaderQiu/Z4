@@ -183,13 +183,13 @@
     [self setuppositionContent];
     
     //网络接口测试
-    [self setupText];
+//    [self setupText];
     
     //网络测试简历Add
     [self setupAdd];
     
     //网络测试order接口
-    [self setupOrder];
+//    [self setupOrder];
     
     //网络测试orderList
     [self setupOrderList];
@@ -241,7 +241,7 @@
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"order_data":@{@"uid":@"1",
+    NSDictionary *pamas = @{@"order_data":@{@"uid":@"2",
                                             @"hid":@"1",
                                             @"position_id":@"1",
                                             @"resume_id":@"31",
@@ -249,8 +249,8 @@
                                             @"position_reward":@"15000",
                                             @"position_title":@"12",
                                             @"position_salary":@"2000",
-                                            @"resume_name":@"Add小明",
-                                            @"resume_title":@"Add产品",
+                                            @"resume_name":@"今天周六啊",
+                                            @"resume_title":@"明天周日啊",
                                     },
                             
                             
@@ -334,13 +334,13 @@
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"keywords":@"A",
+    NSDictionary *pamas = @{@"keyword":@"产品",
                             @"page":@"0",
                             @"uid":@"2"};
     
 //    NSLog(@"简历文字搜索的内容%@",text);
     
-    [mgr POST:UrlStrResumeSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeSearch" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         NSLog(@"简历搜索成功==》%@",responseObject);
 //        NSArray *dict = [responseObject objectForKey:@"data"];
