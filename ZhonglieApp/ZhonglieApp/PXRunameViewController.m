@@ -312,12 +312,13 @@
 {
     NSLog(@"删除简历");
     
-    
+#warning TODO 删除简历行号有误
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+
     
     [_dataArray removeObjectAtIndex:indexPath.row];
     
-    [_tableV deleteRowsAtIndexPaths:@[indexPath]  withRowAnimation:UITableViewRowAnimationFade];
+    [_tableV deleteRowsAtIndexPaths:@[indexPath]  withRowAnimation:UITableViewRowAnimationRight];
     
     [_tableV reloadData];
 }
