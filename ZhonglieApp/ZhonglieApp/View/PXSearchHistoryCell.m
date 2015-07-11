@@ -8,7 +8,7 @@
 
 #import "PXSearchHistoryCell.h"
 #import "PXSearchLabel.h"
-
+#import "PXMainViewController.h"
 @interface PXSearchHistoryCell ()
 @property (weak, nonatomic) IBOutlet UIButton *Btn1;
 @property (weak, nonatomic) IBOutlet UIButton *Btn2;
@@ -29,7 +29,7 @@
 
 
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier target:(id)target action:(SEL)action target2:(id)target2 action2:(SEL)action2 target3:(id)target3 action3:(SEL)action3 target4:(id)target4 action4:(SEL)action4 target5:(id)target5 action5:(SEL)action5 target6:(id)target6 action6:(SEL)action6
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         /**
@@ -47,6 +47,18 @@
         
         //设置为不可选中
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        [_Btn1 addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+        
+        [_Btn2 addTarget:target2 action:action2 forControlEvents:UIControlEventTouchUpInside];
+        
+        [_Btn3 addTarget:target3 action:action3 forControlEvents:UIControlEventTouchUpInside];
+        
+        [_Btn4 addTarget:target4 action:action4 forControlEvents:UIControlEventTouchUpInside];
+        
+        [_Btn5 addTarget:target5 action:action5 forControlEvents:UIControlEventTouchUpInside];
+        
+        [_Btn6 addTarget:target6 action:action6 forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -66,6 +78,12 @@
     PXSearchLabel *lable04 = searchLabels[3];
     PXSearchLabel *lable05 = searchLabels[4];
     PXSearchLabel *lable06 = searchLabels[5];
+  
+#warning TODO 热搜标签传值问题
+    PXMainViewController *MainVC = [[PXMainViewController alloc]init];
+    MainVC.SearchLabel1  = lable01.title;
+    
+    NSLog(@"SearchLabel1%@",MainVC.SearchLabel1);
 
     [self.Btn1 setTitle:lable01.title forState:UIControlStateNormal];
     

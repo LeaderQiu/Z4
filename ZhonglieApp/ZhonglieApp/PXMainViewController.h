@@ -16,5 +16,8 @@
  */
 @property (nonatomic,copy) NSString *SearchText;
 
+@property (nonatomic,copy) NSString *SearchLabel1;
+
+
 
 @end

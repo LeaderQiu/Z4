@@ -183,7 +183,7 @@
     [self setuppositionContent];
     
     //网络接口测试
-    [self setupText];
+//    [self setupText];
     
     //网络测试简历Add
     [self setupAdd];
@@ -342,7 +342,7 @@
     
     NSLog(@"接口测试的参数%@",pamas);
     
-    [mgr POST:@"http://123.57.147.235/index.php/home/user/userEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:UrlStrPositionSearchLabel parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         NSLog(@"接口测试成功==》%@",responseObject);
         
@@ -407,6 +407,10 @@
         NSLog(@"失败的回调==>%@",error);
         
     }];
+    
+    
+    
+     NSLog(@"SearchLabel1===>%@",self.SearchLabel1);
 
 }
 
@@ -775,7 +779,7 @@
             
             if (cell == nil) {
                 
-                cell = [[PXSearchHistoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:searchHistoryID];
+                cell = [[PXSearchHistoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:searchHistoryID target:self action:@selector(Btn1Click) target2:self action2:@selector(Btn2Click) target3:self action3:@selector(Btn3Click) target4:self action4:@selector(Btn4Click) target5:self action5:@selector(Btn5Click) target6:self action6:@selector(Btn6Click)];
             }
             
             cell.searchLabels = self.dataArray1;
@@ -864,7 +868,43 @@
     
 }
 
+ //热搜标签点击事件
+//Btn1
+-(void)Btn1Click{
+//    
+//    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
+//    
+////    SearchVC.SearchText =  ;
+//    
+//    [self.navigationController pushViewController:SearchVC animated:YES];
     
+    PXSearchLabel *searchLabel = [[PXSearchLabel alloc]init];
+    
+    NSLog(@"%@",searchLabel.title);
+    
+//    NSLog(@"SearchLabel1===>%@",self.SearchLabel1);
+    
+}
+//Btn2
+-(void)Btn2Click{
+    
+}
+//Btn3
+-(void)Btn3Click{
+    
+}
+//Btn4
+-(void)Btn4Click{
+    
+}
+//Btn5
+-(void)Btn5Click{
+    
+}
+//Btn6
+-(void)Btn6Click{
+    
+}
     
     
 
