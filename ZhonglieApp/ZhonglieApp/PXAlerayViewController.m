@@ -627,6 +627,540 @@
 
     
 }
+//Btn7点击事件
+-(void)Btn7Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn7");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"2"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn7点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn7点击事件失败==》%@",error);
+    }];
+    
+}
+
+//Btn8点击事件
+-(void)Btn8Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn8");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"3"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn8点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn8点击事件失败==》%@",error);
+    }];
+    
+    
+}
+
+//Btn9点击事件
+-(void)Btn9Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn9");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"0"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn9点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn9点击事件失败==》%@",error);
+    }];
+    
+    
+}
+//Btn10点击事件
+-(void)Btn10Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn10");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"1"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn10点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn10点击事件失败==》%@",error);
+    }];
+    
+}
+
+//Btn11点击事件
+-(void)Btn11Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn11");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"4"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn11点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn11点击事件失败==》%@",error);
+    }];
+    
+    
+}
+
+//Btn12点击事件
+-(void)Btn12Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn12");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"5"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn12点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn12点击事件失败==》%@",error);
+    }];
+    
+    
+}
+//Btn13点击事件
+-(void)Btn13Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn13");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"6"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn13点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn13点击事件失败==》%@",error);
+    }];
+    
+}
+
+//Btn14点击事件
+-(void)Btn14Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn14");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"7"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn14点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn14点击事件失败==》%@",error);
+    }];
+    
+    
+}
+
+//Btn15点击事件
+-(void)Btn15Click
+{
+    self.AlertV3.hidden = YES;
+    self.AlertV2.hidden = YES;
+    self.AlertV1.hidden = YES;
+    NSLog(@"Btn15");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"page":@"0",
+                            @"order_status":@"8"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"Btn15点击事件==》%@",responseObject);
+        
+        NSArray *dictarray = [responseObject objectForKey:@"data"];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code != 1000) {
+            
+            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"对不起，目前没有此简历";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            
+            [hud hide:YES afterDelay:1];
+            
+            NSLog(@"搜索有误");
+            
+        }else{
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictarray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+                
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"Btn15点击事件失败==》%@",error);
+    }];
+    
+    
+}
 
 //点击薪资待遇
 -(void)DaiYuClick
