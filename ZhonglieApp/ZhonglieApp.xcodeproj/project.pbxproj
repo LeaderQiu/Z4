@@ -43,6 +43,8 @@
 		FD45190E1B21323500A49D88 /* PXSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD45190C1B21323500A49D88 /* PXSearchCell.m */; };
 		FD45190F1B21323500A49D88 /* PXSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD45190D1B21323500A49D88 /* PXSearchCell.xib */; };
 		FD4519221B21C46B00A49D88 /* PXDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4519201B21C46B00A49D88 /* PXDetailViewController.m */; };
+		FD6AD5DF1B50F52A008CE6E5 /* PXAddRuname.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6AD5DE1B50F52A008CE6E5 /* PXAddRuname.xib */; };
+		FD6AD5E21B50F554008CE6E5 /* PXAddRuname.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6AD5E11B50F554008CE6E5 /* PXAddRuname.m */; };
 		FD74078B1B1884F400C6A14C /* PXMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD74078A1B1884F400C6A14C /* PXMainCell.xib */; };
 		FD818DB11B4CFDE80010D8CE /* PXOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD818DB01B4CFDE80010D8CE /* PXOrderCell.m */; };
 		FD8203071B32757A00894743 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8202E71B32757A00894743 /* MKAnnotationView+WebCache.m */; };
@@ -187,6 +189,9 @@
 		FD45190D1B21323500A49D88 /* PXSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXSearchCell.xib; sourceTree = "<group>"; };
 		FD45191F1B21C46B00A49D88 /* PXDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDetailViewController.h; sourceTree = "<group>"; };
 		FD4519201B21C46B00A49D88 /* PXDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDetailViewController.m; sourceTree = "<group>"; };
+		FD6AD5DE1B50F52A008CE6E5 /* PXAddRuname.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXAddRuname.xib; sourceTree = "<group>"; };
+		FD6AD5E01B50F554008CE6E5 /* PXAddRuname.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAddRuname.h; sourceTree = "<group>"; };
+		FD6AD5E11B50F554008CE6E5 /* PXAddRuname.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAddRuname.m; sourceTree = "<group>"; };
 		FD74078A1B1884F400C6A14C /* PXMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXMainCell.xib; sourceTree = "<group>"; };
 		FD818DAF1B4CFDE80010D8CE /* PXOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXOrderCell.h; sourceTree = "<group>"; };
 		FD818DB01B4CFDE80010D8CE /* PXOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXOrderCell.m; sourceTree = "<group>"; };
@@ -575,6 +580,9 @@
 				FD991CAB1B2586C100E79F12 /* PXRuname2Cell.h */,
 				FD991CAC1B2586C100E79F12 /* PXRuname2Cell.m */,
 				FD991CAD1B2586C100E79F12 /* PXRuname2Cell.xib */,
+				FD6AD5DE1B50F52A008CE6E5 /* PXAddRuname.xib */,
+				FD6AD5E01B50F554008CE6E5 /* PXAddRuname.h */,
+				FD6AD5E11B50F554008CE6E5 /* PXAddRuname.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -855,6 +863,7 @@
 				FDFDBCA61B26FE00001C360A /* PXHistoryCell.xib in Resources */,
 				FD3E260A1B12C6B200901E42 /* Images.xcassets in Resources */,
 				FD991CB41B258AC400E79F12 /* PXRunameCell.xib in Resources */,
+				FD6AD5DF1B50F52A008CE6E5 /* PXAddRuname.xib in Resources */,
 				FD4518FC1B1EE14100A49D88 /* cityGroups.plist in Resources */,
 				FDF0617C1B0EFC6E0075A5CB /* LaunchScreen.xib in Resources */,
 				FD4518FB1B1EE14100A49D88 /* cities.plist in Resources */,
@@ -911,6 +920,7 @@
 				FDE764CE1B2AEFC600CF1F01 /* PXEditRunameViewController.m in Sources */,
 				FD3F89C71B3179CF002210A6 /* MJFoundation.m in Sources */,
 				FD3F89C91B3179CF002210A6 /* MJType.m in Sources */,
+				FD6AD5E21B50F554008CE6E5 /* PXAddRuname.m in Sources */,
 				FD8203341B32760700894743 /* MASLayoutConstraint.m in Sources */,
 				FDC14BA21B3946FA00B9F34E /* PXWeChatViewController.m in Sources */,
 				FD8203081B32757A00894743 /* NSData+ImageContentType.m in Sources */,

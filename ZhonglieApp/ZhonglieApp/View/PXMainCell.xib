@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
     </dependencies>
     <objects>
@@ -21,9 +20,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80-90W/年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLd-wb-iSu" userLabel="年薪">
-                    <rect key="frame" x="8" y="39" width="90" height="21"/>
+                    <rect key="frame" x="8" y="39" width="120" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="90" id="Dpr-Qa-4t7"/>
+                        <constraint firstAttribute="width" constant="120" id="Dpr-Qa-4t7"/>
                         <constraint firstAttribute="height" constant="21" id="kfz-9N-Ved"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
