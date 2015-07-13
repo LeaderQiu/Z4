@@ -14,6 +14,7 @@
 #import "MJExtension.h"
 #import "UIColor+SYExtension.h"
 #import "MBProgressHUD.h"
+#import "MJRefresh.h"
 
 @interface PXAlerayViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,6 +27,8 @@
 @property(nonatomic,strong) UIView *AlertV3;
 
 @property(nonatomic,strong) UIView *headerV;
+
+@property(nonatomic,assign) NSInteger pageNumber;
 
 
 
@@ -48,10 +51,16 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    
+    [self.tableView.header beginRefreshing];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 
     
-    //加载网络数据
-    [self setupOrderList];
+//    //加载网络数据
+//    [self setupOrderList];
 
 }
 - (NSMutableArray *)dataArray {
@@ -62,6 +71,88 @@
     return _dataArray;
 }
 
+
+//下拉刷新控件loadNewData
+-(void)loadNewData
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"uid":@"2"};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //成功的回调
+        NSLog(@"已推荐列表成功==>%@",responseObject);
+        
+        [self.tableView.header endRefreshing];
+        
+        NSArray *dictArray = [responseObject objectForKey:@"data"];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        for (NSDictionary *dict in dictArray) {
+            PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+            
+            [tempArray addObject:order];
+        }
+        
+        [self.dataArray addObjectsFromArray:tempArray];
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //失败的回调
+        NSLog(@"已推荐列表失败==》%@",error);
+        
+        [self.tableView.header endRefreshing];
+        
+    }];
+
+}
+
+//上拉刷新控件loadMoreData
+-(void)loadMoreData
+{
+    self.pageNumber += 1;
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"uid":@"2",@"page":[NSString stringWithFormat:@"%zd",self.pageNumber]};
+    
+    [mgr POST:UrlStrOrderList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //成功的回调
+        NSLog(@"已推荐列表成功==>%@",responseObject);
+        
+        [self.tableView.footer endRefreshing];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code == 1000) {
+            
+            NSArray *dictArray = [responseObject objectForKey:@"data"];
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dict in dictArray) {
+                PXOrderCell *order = [PXOrderCell objectWithKeyValues:dict];
+                
+                [tempArray addObject:order];
+            }
+            
+            [self.dataArray addObjectsFromArray:tempArray];
+            [self.tableView reloadData];
+
+        }else{
+            self.pageNumber -= 1;
+            
+            [self.tableView.footer noticeNoMoreData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //失败的回调
+        NSLog(@"已推荐列表失败==》%@",error);
+        
+        [self.tableView.footer noticeNoMoreData];
+        
+    }];
+
+}
 
 
 //加载网络数据
