@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *positionStatus;
 
 
+
+
 /**存放的模型数组*/
 @property(nonatomic,strong) NSMutableArray *dataArray;
 
@@ -69,6 +71,8 @@
     self.positionAuth.hidden = zhiWei.position_auth;
     
     self.positionStatus.hidden = !zhiWei.position_status;
+    
+   
 }
 
 

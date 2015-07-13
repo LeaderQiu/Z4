@@ -195,8 +195,8 @@
     //网络请求文字搜索
     [self setupSearch];
     
-    //网络请求-职位详情
-    [self setuppositionContent];
+//    //网络请求-职位详情
+//    [self setuppositionContent];
     
     //网络接口测试
 //    [self setupText];
@@ -349,7 +349,7 @@
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"pid":@"1"};
+    NSDictionary *pamas = @{@"pid":@"27"};
     
     [mgr POST:@"http://123.57.147.235/index.php/home/position/positionContent" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
@@ -560,9 +560,12 @@
         for (NSDictionary *dict in dictArray) {
             
             PXZhiWei *ZhiWei = [PXZhiWei objectWithKeyValues:dict];
+             NSLog(@"++++%zd",ZhiWei.Id);
+            
             
             [tempArray addObject:ZhiWei];
         }
+       
         
         [self.dataArray addObjectsFromArray:tempArray];
         
@@ -823,35 +826,6 @@
     
 }
 
-////文字搜索
-//-(void)setupTextSearchWithText:(NSString *)text
-//{
-//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-//    
-//    NSDictionary *pamas = @{@"keywords":text,@"page":@"0"};
-//    
-//    NSLog(@"文字搜索的内容%@",text);
-//    
-//    [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        //
-//        NSLog(@"文字搜索成功==》%@",responseObject);
-//        NSArray *dictarray = [responseObject objectForKey:@"data"];
-//        NSMutableArray *tempArray = [NSMutableArray array];
-//        
-//        for (NSDictionary *dict in dictarray) {
-//            PXZhiWei *zhiwei = [PXZhiWei objectWithKeyValues:dict];
-//            
-//            [tempArray addObject:zhiwei];
-//            
-//        }
-//        [self.dataArray addObjectsFromArray:tempArray];
-//        
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        //
-//        NSLog(@"文字搜索失败==》%@",error);
-//    }];
-//}
 
 //加载搜索历史
 -(void)setupSearchHistory
@@ -1077,6 +1051,9 @@
 
 //点击cell事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
     if ([tableView isEqual:_MainTableV]) {
         PXDetailViewController *DetailVC = [[PXDetailViewController alloc]initWithStyle:UITableViewStyleGrouped];
         

@@ -64,6 +64,12 @@
 		FD4519221B21C46B00A49D88 /* PXDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4519201B21C46B00A49D88 /* PXDetailViewController.m */; };
 		FD6AD5DF1B50F52A008CE6E5 /* PXAddRuname.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6AD5DE1B50F52A008CE6E5 /* PXAddRuname.xib */; };
 		FD6AD5E21B50F554008CE6E5 /* PXAddRuname.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6AD5E11B50F554008CE6E5 /* PXAddRuname.m */; };
+		FD72D4141B536C4D00A5131C /* PXDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD72D4131B536C4D00A5131C /* PXDetailView.m */; };
+		FD72D4171B536C7700A5131C /* PXDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = FD72D4161B536C7700A5131C /* PXDetail.m */; };
+		FD72D41A1B53A58D00A5131C /* PXDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = FD72D4191B53A58D00A5131C /* PXDescription.m */; };
+		FD72D4201B53ACE900A5131C /* PXCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = FD72D41F1B53ACE900A5131C /* PXCompany.m */; };
+		FD72D4231B53AD1C00A5131C /* PXPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = FD72D4221B53AD1C00A5131C /* PXPosition.m */; };
+		FD72D4261B53ADAA00A5131C /* PXRequir.m in Sources */ = {isa = PBXBuildFile; fileRef = FD72D4251B53ADAA00A5131C /* PXRequir.m */; };
 		FD74078B1B1884F400C6A14C /* PXMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD74078A1B1884F400C6A14C /* PXMainCell.xib */; };
 		FD818DB11B4CFDE80010D8CE /* PXOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD818DB01B4CFDE80010D8CE /* PXOrderCell.m */; };
 		FD8203071B32757A00894743 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8202E71B32757A00894743 /* MKAnnotationView+WebCache.m */; };
@@ -249,6 +255,18 @@
 		FD6AD5DE1B50F52A008CE6E5 /* PXAddRuname.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXAddRuname.xib; sourceTree = "<group>"; };
 		FD6AD5E01B50F554008CE6E5 /* PXAddRuname.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAddRuname.h; sourceTree = "<group>"; };
 		FD6AD5E11B50F554008CE6E5 /* PXAddRuname.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAddRuname.m; sourceTree = "<group>"; };
+		FD72D4121B536C4D00A5131C /* PXDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDetailView.h; sourceTree = "<group>"; };
+		FD72D4131B536C4D00A5131C /* PXDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDetailView.m; sourceTree = "<group>"; };
+		FD72D4151B536C7700A5131C /* PXDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDetail.h; sourceTree = "<group>"; };
+		FD72D4161B536C7700A5131C /* PXDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDetail.m; sourceTree = "<group>"; };
+		FD72D4181B53A58D00A5131C /* PXDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDescription.h; sourceTree = "<group>"; };
+		FD72D4191B53A58D00A5131C /* PXDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDescription.m; sourceTree = "<group>"; };
+		FD72D41E1B53ACE900A5131C /* PXCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCompany.h; sourceTree = "<group>"; };
+		FD72D41F1B53ACE900A5131C /* PXCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCompany.m; sourceTree = "<group>"; };
+		FD72D4211B53AD1C00A5131C /* PXPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPosition.h; sourceTree = "<group>"; };
+		FD72D4221B53AD1C00A5131C /* PXPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPosition.m; sourceTree = "<group>"; };
+		FD72D4241B53ADAA00A5131C /* PXRequir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXRequir.h; sourceTree = "<group>"; };
+		FD72D4251B53ADAA00A5131C /* PXRequir.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRequir.m; sourceTree = "<group>"; };
 		FD74078A1B1884F400C6A14C /* PXMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXMainCell.xib; sourceTree = "<group>"; };
 		FD818DAF1B4CFDE80010D8CE /* PXOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXOrderCell.h; sourceTree = "<group>"; };
 		FD818DB01B4CFDE80010D8CE /* PXOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXOrderCell.m; sourceTree = "<group>"; };
@@ -404,6 +422,8 @@
 				FD45190B1B21323500A49D88 /* PXSearchCell.h */,
 				FD45190C1B21323500A49D88 /* PXSearchCell.m */,
 				FD45190D1B21323500A49D88 /* PXSearchCell.xib */,
+				FD72D4121B536C4D00A5131C /* PXDetailView.h */,
+				FD72D4131B536C4D00A5131C /* PXDetailView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -578,6 +598,16 @@
 				FD3F89B21B317265002210A6 /* PXZhiWei.m */,
 				FDB4CD1C1B43DACD00059FBF /* PXSearchLabel.h */,
 				FDB4CD1D1B43DACD00059FBF /* PXSearchLabel.m */,
+				FD72D4151B536C7700A5131C /* PXDetail.h */,
+				FD72D4161B536C7700A5131C /* PXDetail.m */,
+				FD72D4181B53A58D00A5131C /* PXDescription.h */,
+				FD72D4191B53A58D00A5131C /* PXDescription.m */,
+				FD72D41E1B53ACE900A5131C /* PXCompany.h */,
+				FD72D41F1B53ACE900A5131C /* PXCompany.m */,
+				FD72D4211B53AD1C00A5131C /* PXPosition.h */,
+				FD72D4221B53AD1C00A5131C /* PXPosition.m */,
+				FD72D4241B53ADAA00A5131C /* PXRequir.h */,
+				FD72D4251B53ADAA00A5131C /* PXRequir.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1052,6 +1082,7 @@
 				FD8203351B32760700894743 /* MASViewAttribute.m in Sources */,
 				FDB4CD1E1B43DACD00059FBF /* PXSearchLabel.m in Sources */,
 				FD45190E1B21323500A49D88 /* PXSearchCell.m in Sources */,
+				FD72D41A1B53A58D00A5131C /* PXDescription.m in Sources */,
 				FD1B81F01B524E3800EF0993 /* MJRefreshBackGifFooter.m in Sources */,
 				FD8203131B32757A00894743 /* UIImage+WebP.m in Sources */,
 				FD4519021B1EE82000A49D88 /* UIColor+SYExtension.m in Sources */,
@@ -1059,6 +1090,7 @@
 				FD8203071B32757A00894743 /* MKAnnotationView+WebCache.m in Sources */,
 				FDE764C91B2ABFD600CF1F01 /* PXAddRunameViewController.m in Sources */,
 				FD1B81F51B524E3800EF0993 /* MJRefreshStateHeader.m in Sources */,
+				FD72D4261B53ADAA00A5131C /* PXRequir.m in Sources */,
 				FD1178841B185A2D00DAE956 /* PXSearchViewController.m in Sources */,
 				FD8203371B32760700894743 /* NSArray+MASAdditions.m in Sources */,
 				FD3F893D1B3015AB002210A6 /* PXRunameViewController.m in Sources */,
@@ -1069,7 +1101,10 @@
 				FD8203111B32757A00894743 /* UIImage+GIF.m in Sources */,
 				FD4519091B204B2B00A49D88 /* PXSearchHistoryCell.m in Sources */,
 				FD4519221B21C46B00A49D88 /* PXDetailViewController.m in Sources */,
+				FD72D4171B536C7700A5131C /* PXDetail.m in Sources */,
+				FD72D4231B53AD1C00A5131C /* PXPosition.m in Sources */,
 				FD3F89AB1B311FAF002210A6 /* AFNetworkReachabilityManager.m in Sources */,
+				FD72D4201B53ACE900A5131C /* PXCompany.m in Sources */,
 				FD3F89AC1B311FAF002210A6 /* AFSecurityPolicy.m in Sources */,
 				FDF0616E1B0EFC6E0075A5CB /* main.m in Sources */,
 				7A1B1A5C1B17225D009C49E2 /* PXMainCell.m in Sources */,
@@ -1096,6 +1131,7 @@
 				FD8203151B32757A00894743 /* UIImageView+WebCache.m in Sources */,
 				FD3F89AF1B311FAF002210A6 /* AFURLResponseSerialization.m in Sources */,
 				FD991CAE1B2586C100E79F12 /* PXRuname2Cell.m in Sources */,
+				FD72D4141B536C4D00A5131C /* PXDetailView.m in Sources */,
 				FD3F89CC1B3179CF002210A6 /* NSObject+MJProperty.m in Sources */,
 				FD8203321B32760700894743 /* MASConstraint.m in Sources */,
 				FD3F89C81B3179CF002210A6 /* MJProperty.m in Sources */,
