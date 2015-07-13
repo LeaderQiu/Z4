@@ -16,4 +16,6 @@
 //暴露一个模型
 @property (nonatomic,strong) PXRuname *Runame;
 
+@property (weak, nonatomic) IBOutlet UIButton *DeleteBtn;
+
 @end

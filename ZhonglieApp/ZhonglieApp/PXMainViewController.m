@@ -21,6 +21,7 @@
 #import "PXSearchLabel.h"
 #import "PXSearchHistoryCell.h"
 #import "MBProgressHUD.h"
+#import "MJRefresh.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -53,6 +54,9 @@
 
 @property(nonatomic,strong) NSString *myLatitude;
 @property(nonatomic,strong) NSString *myLongitude;
+
+@property(nonatomic,assign) NSInteger pageNumber;
+
 @end
 
 @implementation PXMainViewController
@@ -161,9 +165,22 @@
     //设置tableView数据源代理
     MainTableV.dataSource = self;
     MainTableV.delegate = self;
-     _MainTableV = MainTableV;
     
     [self.view addSubview:MainTableV];
+    
+       _MainTableV = MainTableV;
+    
+    self.pageNumber = 0;
+    
+    //加入MJRefresh
+    self.MainTableV.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    
+    [self.MainTableV.header beginRefreshing];
+    
+    self.MainTableV.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    
+//    self.MainTableV.footer.stateLabel.hidden = YES;
+    
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"返回键"] style:UIBarButtonItemStyleDone target:nil action:nil];
     
@@ -171,7 +188,7 @@
     _SearchHistory = SearchHistory;
 
     //网络请求职位列表数据
-    [self setupHTTPData];
+//    [self setupHTTPData];
     
     //网络请求热搜数据
     [self setupNetText];
@@ -195,6 +212,118 @@
     [self setupOrderList];
     
     
+}
+
+//下拉刷新
+-(void)loadNewData
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"page":@"0"};
+    
+    [manager POST:UrlStrPosition parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        //成功的回调
+        NSLog(@"成功的回调==>%@",responseObject);
+        
+        [self.MainTableV.header endRefreshing];
+        
+        NSArray *dictArray = [responseObject objectForKey:@"data"];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        for (NSDictionary *dict in dictArray) {
+            
+            PXZhiWei *ZhiWei = [PXZhiWei objectWithKeyValues:dict];
+            
+            [tempArray addObject:ZhiWei];
+        }
+        [self.dataArray removeAllObjects];
+        
+        [self.dataArray addObjectsFromArray:tempArray];
+        
+        [_MainTableV reloadData];
+        
+        
+        NSLog(@"<dataArray在这里==>%@",self.dataArray);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        //失败的回调
+        NSLog(@"失败的回调==>%@",error);
+        
+        [self.MainTableV.header endRefreshing];
+        
+    }];
+    
+    
+    
+
+}
+
+//上拉刷新
+-(void)loadMoreData
+{
+    self.pageNumber += 1;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"page":[NSString stringWithFormat:@"%zd", self.pageNumber]};
+    
+    [manager POST:UrlStrPosition parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        //成功的回调
+        NSLog(@"loadMore成功的回调==>%@",responseObject);
+        
+        NSLog(@"loadMore PageNum==>%zd",self.pageNumber);
+        
+        [self.MainTableV.footer endRefreshing];
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code == 1000){
+            
+//            self.MainTableV.footer.refreshingTitleHidden = NO;
+            
+            NSArray *dictArray = [responseObject objectForKey:@"data"];
+            NSMutableArray *tempArray = [NSMutableArray array];
+
+            for (NSDictionary *dict in dictArray) {
+                
+                PXZhiWei *ZhiWei = [PXZhiWei objectWithKeyValues:dict];
+                
+                [tempArray addObject:ZhiWei];
+            }
+            
+            [self.dataArray addObjectsFromArray:tempArray];
+            
+            [_MainTableV reloadData];
+            
+            
+            NSLog(@"<loadMoredataArray在这里==>%@",self.dataArray);
+        } else {
+            
+            self.pageNumber -= 1;
+            
+            [self.MainTableV.footer noticeNoMoreData];
+        }
+        
+
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        //失败的回调
+        NSLog(@"失败的回调==>%@",error);
+        
+        [self.MainTableV.footer endRefreshing];
+        
+        self.pageNumber -= 1;
+        
+        [self.MainTableV.header endRefreshing];
+        
+    }];
+    
+    
+
 }
 
 /**
@@ -439,6 +568,7 @@
         [self.dataArray addObjectsFromArray:tempArray];
         
         [_MainTableV reloadData];
+        
         
         NSLog(@"<dataArray在这里==>%@",self.dataArray);
         
@@ -779,7 +909,7 @@
             
             if (cell == nil) {
                 
-                cell = [[PXSearchHistoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:searchHistoryID target:self action:@selector(Btn1Click) target2:self action2:@selector(Btn2Click) target3:self action3:@selector(Btn3Click) target4:self action4:@selector(Btn4Click) target5:self action5:@selector(Btn5Click) target6:self action6:@selector(Btn6Click)];
+                cell = [[PXSearchHistoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:searchHistoryID target:self action:@selector(Btn1Click:) target2:self action2:@selector(Btn2Click) target3:self action3:@selector(Btn3Click) target4:self action4:@selector(Btn4Click) target5:self action5:@selector(Btn5Click) target6:self action6:@selector(Btn6Click)];
             }
             
             cell.searchLabels = self.dataArray1;
@@ -870,7 +1000,7 @@
 
  //热搜标签点击事件
 //Btn1
--(void)Btn1Click{
+-(void)Btn1Click:(UIButton *)btn{
 //    
 //    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
 //    
@@ -880,7 +1010,7 @@
     
     PXSearchLabel *searchLabel = [[PXSearchLabel alloc]init];
     
-    NSLog(@"%@",searchLabel.title);
+    NSLog(@"%@",btn.titleLabel.text);
     
 //    NSLog(@"SearchLabel1===>%@",self.SearchLabel1);
     

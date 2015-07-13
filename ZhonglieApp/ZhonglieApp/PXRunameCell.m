@@ -11,7 +11,6 @@
 
 @interface PXRunameCell () 
 @property (weak, nonatomic) IBOutlet UIButton *EditBtn;
-@property (weak, nonatomic) IBOutlet UIButton *DeleteBtn;
 @property (weak, nonatomic) IBOutlet UILabel *RiqiLabel;
 @property (weak, nonatomic) IBOutlet UILabel *NameLabel;
 

@@ -297,28 +297,35 @@
     PXRuname *runame = self.dataArray[indexPath.row];
     
     if (cell == nil) {
-        cell = [[PXRunameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RunameID target:self action:@selector(EditBtnClick) target2:self action2:@selector(DeleteBtnClick)];
+        cell = [[PXRunameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RunameID target:self action:@selector(EditBtnClick) target2:self action2:@selector(DeleteBtnClick:)];
         
         
     }
     
     cell.Runame = runame;
     
+    cell.DeleteBtn.tag = indexPath.row;
+    
+//    cell
+    
     return cell;
 }
 
 //删除按钮点击事件
--(void)DeleteBtnClick
+-(void)DeleteBtnClick:(UIButton *)btn
 {
     NSLog(@"删除简历");
-    
-#warning TODO 删除简历行号有误
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
 
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:btn.tag inSection:0];
+    
+    NSLog(@"++++++++++++++++%zd", indexPath.row);
     
     [_dataArray removeObjectAtIndex:indexPath.row];
     
     [_tableV deleteRowsAtIndexPaths:@[indexPath]  withRowAnimation:UITableViewRowAnimationRight];
+    
+    
+
     
     [_tableV reloadData];
 }
