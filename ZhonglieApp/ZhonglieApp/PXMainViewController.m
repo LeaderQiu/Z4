@@ -891,7 +891,7 @@
     }else if ([tableView isEqual:self.SearchHistory]){
         return 5;
     }
-    return 10;
+    return 8;
 }
 
 //自定义Cell
@@ -908,7 +908,7 @@
             
             if (cell == nil) {
                 
-                cell = [[PXSearchHistoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:searchHistoryID target:self action:@selector(Btn1Click:) target2:self action2:@selector(Btn2Click) target3:self action3:@selector(Btn3Click) target4:self action4:@selector(Btn4Click) target5:self action5:@selector(Btn5Click) target6:self action6:@selector(Btn6Click)];
+                cell = [[PXSearchHistoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:searchHistoryID target:self action:@selector(Btn1Click:) target2:self action2:@selector(Btn2Click:) target3:self action3:@selector(Btn3Click:) target4:self action4:@selector(Btn4Click:) target5:self action5:@selector(Btn5Click:) target6:self action6:@selector(Btn6Click:)];
             }
             
             cell.searchLabels = self.dataArray1;
@@ -1000,33 +1000,73 @@
  //热搜标签点击事件
 //Btn1
 -(void)Btn1Click:(UIButton *)btn{
-#warning TODO 跳转
   
     
     NSLog(@"%@",btn.titleLabel.text);
     
+    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
+    
+    SearchVC.SearchText = btn.titleLabel.text;
+    
+    [self.navigationController pushViewController:SearchVC animated:YES];
 
     
 }
 //Btn2
--(void)Btn2Click{
+-(void)Btn2Click:(UIButton *)btn{
     
+    NSLog(@"%@",btn.titleLabel.text);
+    
+    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
+    
+    SearchVC.SearchText = btn.titleLabel.text;
+    
+    [self.navigationController pushViewController:SearchVC animated:YES];
+
 }
 //Btn3
--(void)Btn3Click{
+-(void)Btn3Click:(UIButton *)btn{
+    NSLog(@"%@",btn.titleLabel.text);
     
+    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
+    
+    SearchVC.SearchText = btn.titleLabel.text;
+    
+    [self.navigationController pushViewController:SearchVC animated:YES];
+
 }
 //Btn4
--(void)Btn4Click{
+-(void)Btn4Click:(UIButton *)btn{
+    NSLog(@"%@",btn.titleLabel.text);
     
+    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
+    
+    SearchVC.SearchText = btn.titleLabel.text;
+    
+    [self.navigationController pushViewController:SearchVC animated:YES];
+
 }
 //Btn5
--(void)Btn5Click{
+-(void)Btn5Click:(UIButton *)btn{
+    NSLog(@"%@",btn.titleLabel.text);
     
+    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
+    
+    SearchVC.SearchText = btn.titleLabel.text;
+    
+    [self.navigationController pushViewController:SearchVC animated:YES];
+
 }
 //Btn6
--(void)Btn6Click{
+-(void)Btn6Click:(UIButton *)btn{
+    NSLog(@"%@",btn.titleLabel.text);
     
+    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
+    
+    SearchVC.SearchText = btn.titleLabel.text;
+    
+    [self.navigationController pushViewController:SearchVC animated:YES];
+
 }
     
     
