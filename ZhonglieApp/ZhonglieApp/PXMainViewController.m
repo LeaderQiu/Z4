@@ -179,7 +179,6 @@
     
     self.MainTableV.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
-//    self.MainTableV.footer.stateLabel.hidden = YES;
     
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"返回键"] style:UIBarButtonItemStyleDone target:nil action:nil];
@@ -1001,18 +1000,12 @@
  //热搜标签点击事件
 //Btn1
 -(void)Btn1Click:(UIButton *)btn{
-//    
-//    PXSearchViewController *SearchVC = [[PXSearchViewController alloc] init] ;
-//    
-////    SearchVC.SearchText =  ;
-//    
-//    [self.navigationController pushViewController:SearchVC animated:YES];
-    
-    PXSearchLabel *searchLabel = [[PXSearchLabel alloc]init];
+#warning TODO 跳转
+  
     
     NSLog(@"%@",btn.titleLabel.text);
     
-//    NSLog(@"SearchLabel1===>%@",self.SearchLabel1);
+
     
 }
 //Btn2

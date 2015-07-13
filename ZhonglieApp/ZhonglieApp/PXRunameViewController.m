@@ -16,6 +16,7 @@
 #import "PXRuname.h"
 #import "MJExtension.h"
 #import "MBProgressHUD.h"
+#import "MJRefresh.h"
 
 
 
@@ -26,6 +27,8 @@
 @property(nonatomic,strong) UITableView *tableV;
 
 @property(nonatomic,copy) NSString *UserText;
+
+@property(nonatomic,assign) NSInteger pageNumber;
 
 
 //存放的模型数组
@@ -50,7 +53,7 @@
     
     [self setupTableV];
     
-    [self setupData];
+//    [self setupData];
 }
 
 //懒加载
@@ -275,8 +278,109 @@
     [self.view addSubview:ScrollV];
     [ScrollV addSubview:tableV];
     
+    //加入刷新控件
+    _tableV.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    
+    [_tableV.header beginRefreshing];
+    
+    _tableV.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+   
+    _tableV.footer.hidden = YES;
 }
 
+//下拉刷新loadNewData
+-(void)loadNewData
+{
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"page":@"0",@"uid":@"1"};
+    
+    [mgr POST:UrlStrResumeList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //成功的回调
+        
+        NSArray *dict = [responseObject objectForKey:@"data"];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        for (NSDictionary *dictArray in dict) {
+            
+            PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
+            
+            [tempArray addObject:Runame];
+        }
+        
+        [self.dataArray addObjectsFromArray:tempArray];
+        
+        [_tableV reloadData];
+        
+        NSLog(@"UrlStrResumeList成功==>%@",responseObject);
+        
+        [_tableV.header endRefreshing];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //失败的回调
+        
+        NSLog(@"UrlStrResumeList失败==>%@",error);
+        
+        [_tableV.header endRefreshing];
+    }];
+    
+   
+}
+
+//上拉刷新loadMoreData
+-(void)loadMoreData
+{
+    
+    self.pageNumber += 1;
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"page":[NSString stringWithFormat:@"%zd",self.pageNumber],@"uid":@"1"};
+    
+    [mgr POST:UrlStrResumeList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //成功的回调
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code == 1000) {
+            NSArray *dict = [responseObject objectForKey:@"data"];
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dictArray in dict) {
+                
+                PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
+                
+                [tempArray addObject:Runame];
+            }
+            
+            [self.dataArray addObjectsFromArray:tempArray];
+            
+            [_tableV reloadData];
+            
+            NSLog(@"UrlStrResumeList成功==>%@",responseObject);
+            
+            [_tableV.footer endRefreshing];
+        }else {
+            
+            self.pageNumber -= 1;
+            
+            [_tableV.footer noticeNoMoreData];
+        }
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //失败的回调
+        
+        NSLog(@"UrlStrResumeList失败==>%@",error);
+        
+        self.pageNumber -= 1;
+        
+        [_tableV.footer noticeNoMoreData];
+    }];
+
+}
 
 #pragma mark - Table view data source
 
