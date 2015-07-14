@@ -13,6 +13,7 @@
 #import "PXMiMaViewController1.h"
 #import "PXMiMaViewController2.h"
 #import "WXApi.h"
+#import "PXMainViewController.h"
 
 @interface PXWeChatViewController ()<WXApiDelegate>
 
@@ -32,6 +33,8 @@
     
     self.navigationItem.title = @"帐号中心";
     
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"返回键" highImage:@"返回键" target:self action:@selector(BackClickBtn)];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setupBtn];
@@ -40,7 +43,17 @@
     
 }
 
-
+//点击导航栏返回键
+-(void)BackClickBtn
+{
+    NSLog(@"点击了返回键");
+    
+    PXMainViewController *MainVC = [[PXMainViewController alloc]init];
+    
+    [self.navigationController pushViewController:MainVC animated:YES];
+    
+  
+}
 
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -51,6 +64,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = YES;
+    
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 //设置背景图片

@@ -18,6 +18,7 @@
 #import "PXRunameViewController.h"
 
 
+
 @interface PXUserViewController () <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property(nonatomic,strong) UITextField *TF1;
@@ -501,6 +502,127 @@
     [_TF3 resignFirstResponder];
     [_TF4 resignFirstResponder];
     [_TF5 resignFirstResponder];
+    
+    if (_TF1 != nil) {
+        
+        NSString *str = _TF1.text;
+        
+        NSLog(@"TF1==>%@",str);
+        
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *pamas = @{@"user_info":@{@"uid":@"2",
+                                               @"field":@"name",
+                                               @"user_content":str
+                                        }};
+        
+        [mgr POST:@"http://123.57.147.235/index.php/home/user/userEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+        
+        _TF1 = nil;
+    }
+    
+    if (_TF2 != nil) {
+        
+        NSString *str = _TF2.text;
+        
+        PXMiMaViewController3 *MiMaVC = [[PXMiMaViewController3 alloc]init];
+        
+        MiMaVC.Phonenumber = str;
+        
+        NSLog(@"TF2==>%@",str);
+        
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *pamas = @{@"user_info":@{@"uid":@"2",
+                                               @"field":@"mobile",
+                                               @"user_content":str
+                                               }};
+        
+        [mgr POST:@"http://123.57.147.235/index.php/home/user/userEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+
+        
+        _TF2 = nil;
+    }
+    
+    if (_TF3 != nil) {
+        
+        NSString *str = _TF3.text;
+        
+        NSLog(@"TF3==>%@",str);
+        
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *pamas = @{@"user_info":@{@"uid":@"2",
+                                               @"field":@"email",
+                                               @"user_content":str
+                                               }};
+        
+        [mgr POST:@"http://123.57.147.235/index.php/home/user/userEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+
+        
+        _TF3 = nil;
+    }
+    
+    if (_TF4 != nil) {
+        
+        NSString *str = _TF4.text;
+        
+        NSLog(@"TF4==>%@",str);
+        
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *pamas = @{@"user_info":@{@"uid":@"2",
+                                               @"field":@"bank_name",
+                                               @"user_content":str
+                                               }};
+        
+        [mgr POST:@"http://123.57.147.235/index.php/home/user/userEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+
+        
+        _TF4 = nil;
+    }
+    
+    if (_TF5 != nil) {
+        
+        NSString *str = _TF5.text;
+        
+        NSLog(@"TF5==>%@",str);
+        
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *pamas = @{@"user_info":@{@"uid":@"2",
+                                               @"field":@"bank_code",
+                                               @"user_content":str
+                                               }};
+        
+        [mgr POST:@"http://123.57.147.235/index.php/home/user/userEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+
+        
+        _TF5 = nil;
+    }
+    
+  
+    
     return YES;
 }
 

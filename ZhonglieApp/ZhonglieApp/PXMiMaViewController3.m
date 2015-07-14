@@ -11,12 +11,18 @@
 #import "Masonry.h"
 #import "UIColor+SYExtension.h"
 #import "PXUserViewController.h"
+#import "MBProgressHUD.h"
+#import "AFNetworking.h"
 
 @interface PXMiMaViewController3 () <UITextFieldDelegate>
 
 @property(nonatomic,strong) UITextField *TextField1;
 
 @property(nonatomic,strong) UITextField *TextField2;
+
+
+@property(nonatomic,copy) NSString *str;
+
 
 @end
 
@@ -33,7 +39,7 @@
     self.navigationItem.title = @"修改密码";
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"返回键" highImage:@"返回键" target:self action:@selector(BackClickBtn)];
-    
+    self.str = self.Phonenumber;
 
     [self setupData];
 }
@@ -104,10 +110,10 @@
     }];
     
     
-    //注册Btn
+    //密码太简单
     UILabel *ZhuCe = [UILabel new];
 
-    ZhuCe.text = @"密码太简单";
+    ZhuCe.text = @"";
     
     ZhuCe.textColor = [UIColor colorWithRGB:0x7f7f7f];
     
@@ -183,6 +189,40 @@
 //点击确认修改按钮
 -(void)NextBtnClick
 {
+    if ([_TextField1.text isEqualToString:_TextField2.text]) {
+        NSLog(@"确认修改密码%@",self.Phonenumber);
+        
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *pamas = @{@"password":_TextField1.text,@"user_mobile":@"110220"};
+        
+        [mgr POST:@"http://123.57.147.235/index.php/home/user/setPwd" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            
+            NSLog(@"确认修改成功==》%@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            
+            NSLog(@"确认修改失败==》%@",error);
+        }];
+        
+    }else{
+        
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"两次密码输入有误，请重新输入";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1];
+
+        
+    }
+    
+ 
+    
     PXUserViewController *VC = [[PXUserViewController alloc]init];
     
     [self.navigationController pushViewController:VC animated:YES];
@@ -196,6 +236,18 @@
     [self.TextField2 resignFirstResponder];
 }
 
+//收起键盘
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    [_TextField1 resignFirstResponder];
+    
+    [_TextField2 resignFirstResponder];
+    
+    
+    
+    return YES;
+}
 
 //点击返回键
 -(void)BackClickBtn

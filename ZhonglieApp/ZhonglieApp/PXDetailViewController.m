@@ -28,6 +28,8 @@
 
 @property(nonatomic,strong) NSMutableArray *dataArray;
 
+
+
 //脑残属性们
 //汇报对象
 @property(nonatomic,copy)NSString *HuiBao;
@@ -64,7 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setupHTTPData];
+//    [self setupHTTPData:_pid];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -98,11 +100,11 @@
 }
 
 //网络请求数据
--(void)setupHTTPData
+-(void)setupHTTPData:(NSString * )pid
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"pid":@"27"};
+    NSDictionary *pamas = @{@"pid":pid};
     
     [mgr POST:UrlStrPositionContent parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //

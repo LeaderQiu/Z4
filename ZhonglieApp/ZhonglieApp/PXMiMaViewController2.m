@@ -12,12 +12,16 @@
 #import "Masonry.h"
 #import "UIColor+SYExtension.h"
 #import "PXMiMaViewController3.h"
+#import "MBProgressHUD.h"
+#import "AFNetworking.h"
 
 @interface PXMiMaViewController2 ()<UITextFieldDelegate>
 
 @property(nonatomic,strong) UITextField *TextField1;
 
 @property(nonatomic,strong) UITextField *TextField2;
+
+@property(nonatomic,assign)  NSInteger YanZhengMa;
 
 @end
 
@@ -104,10 +108,10 @@
     }];
     
     
-    //注册Btn
+    //验证码不正确
     UILabel *ZhuCe = [UILabel new];
     
-    ZhuCe.text = @"验证码不正确";
+    ZhuCe.text = @"";
     
     ZhuCe.textColor = [UIColor colorWithRGB:0x7f7f7f];
     
@@ -197,15 +201,110 @@
 //点击了获取验证码
 -(void)YZBtnClick
 {
-    NSLog(@"点击了获取验证码");
+    NSLog(@"点击了获取验证码%@",_TextField1.text);
+    
+    if ([_TextField1.text isEqualToString:@""]) {
+        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"手机号码不能为空";
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        
+        [hud hide:YES afterDelay:1.5];
+    }else{
+    MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    // Configure for text only and offset down
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = @"验证码已发送";
+    hud.margin = 10.f;
+    hud.removeFromSuperViewOnHide = YES;
+    
+    [hud hide:YES afterDelay:1.5];
+    
+    
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"user_mobile":_TextField1.text};
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/user/userRegister" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"获取验证码%@",responseObject);
+        
+        NSInteger str = [[responseObject objectForKey:@"data"] intValue];
+        
+//        int code = [[responseObject objectForKey:@"data"] intValue];
+//        
+//        if (code != 1000) {
+//            MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+//            
+//            // Configure for text only and offset down
+//            hud.mode = MBProgressHUDModeText;
+//            hud.labelText = @"此帐号已被注册";
+//            hud.margin = 10.f;
+//            hud.removeFromSuperViewOnHide = YES;
+//            
+//            [hud hide:YES afterDelay:1.5];
+//        }else{
+            self.YanZhengMa = str;
+//        }
+        
+       
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+//        
+//        MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+//        
+//        // Configure for text only and offset down
+//        hud.mode = MBProgressHUDModeText;
+//        hud.labelText = @"此帐号已被注册";
+//        hud.margin = 10.f;
+//        hud.removeFromSuperViewOnHide = YES;
+//        
+//        [hud hide:YES afterDelay:1.5];
+
+    }];
+    }
+
 }
 
 //点击确认修改按钮
 -(void)NextBtnClick
 {
-    PXMiMaViewController3 *VC = [[PXMiMaViewController3 alloc]init];
+    PXMiMaViewController3 *M3VC = [[PXMiMaViewController3 alloc]init];
     
-    [self.navigationController pushViewController:VC animated:YES];
+    M3VC.Phonenumber = _TextField1.text;
+    
+    
+    if ([_TextField2.text intValue] == self.YanZhengMa) {
+        
+        
+        PXMiMaViewController3 *VC = [[PXMiMaViewController3 alloc]init];
+        
+        [self.navigationController pushViewController:VC animated:YES];
+
+
+    }else{
+        
+                MBProgressHUD *hud =   [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+                // Configure for text only and offset down
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"验证码输入有误";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+        
+                [hud hide:YES afterDelay:1.5];
+        
+        NSLog(@"验证码输入有误==》|%zd|   |%zd|",_TextField2.text,self.YanZhengMa);
+        
+
+        
+    }
+    
 }
 
 //点击空白收起键盘
@@ -214,8 +313,20 @@
     [self.TextField1 resignFirstResponder];
     
     [self.TextField2 resignFirstResponder];
+    
+    
 }
 
+//收起键盘
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    [_TextField1 resignFirstResponder];
+    
+    [_TextField2 resignFirstResponder];
+    
+    return YES;
+}
 
 
 //导航栏返回键

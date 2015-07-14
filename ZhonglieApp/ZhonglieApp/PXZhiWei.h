@@ -25,6 +25,6 @@
 /** 职位诱惑 */
 @property (nonatomic, copy) NSString *position_advantage;
 /** 职位id */
-@property (nonatomic,assign) NSInteger *Id;
+@property (nonatomic,assign) NSInteger pid;
 
 @end

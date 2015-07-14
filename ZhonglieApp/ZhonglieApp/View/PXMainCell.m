@@ -68,10 +68,23 @@
     
     self.positionReward.text = zhiWei.position_reward;
     
-    self.positionAuth.hidden = zhiWei.position_auth;
+    //判断小图
+    if (zhiWei.position_status == 1) {
+        [self.positionStatus setImage:[UIImage imageNamed:@"急"]];
+        
+        if (zhiWei.position_auth == 1) {
+            [self.positionAuth setImage:[UIImage imageNamed:@"证"]];
+        }
+    }
     
-    self.positionStatus.hidden = !zhiWei.position_status;
+    if (zhiWei.position_status == 0) {
+        if (zhiWei.position_auth == 1) {
+            [self.positionStatus setImage:[UIImage imageNamed:@"证"]];
+        }
+    }
+
     
+
    
 }
 

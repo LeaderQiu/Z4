@@ -22,6 +22,7 @@
 #import "PXSearchHistoryCell.h"
 #import "MBProgressHUD.h"
 #import "MJRefresh.h"
+#import "PXDetailViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -56,6 +57,7 @@
 @property(nonatomic,strong) NSString *myLongitude;
 
 @property(nonatomic,assign) NSInteger pageNumber;
+
 
 @end
 
@@ -198,17 +200,17 @@
 //    //网络请求-职位详情
 //    [self setuppositionContent];
     
-    //网络接口测试
-//    [self setupText];
+//    网络接口测试
+    [self setupText];
     
-    //网络测试简历Add
-    [self setupAdd];
+//    //网络测试简历Add
+//    [self setupAdd];
     
-    //网络测试order接口
-    [self setupOrder];
+//    //网络测试order接口
+//    [self setupOrder];
     
-    //网络测试orderList
-    [self setupOrderList];
+//    //网络测试orderList
+//    [self setupOrderList];
     
     
 }
@@ -462,15 +464,14 @@
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"user_info":@{@"uid":@"2",
-                                           @"field":@"mobile",
-                                           @"user_content":@"110"
+    NSDictionary *pamas = @{@"uid":@"1",
+                            @"resume_id":@"177"
                                            
-                                    }};
+                                    };
     
     NSLog(@"接口测试的参数%@",pamas);
     
-    [mgr POST:UrlStrPositionSearchLabel parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         NSLog(@"接口测试成功==》%@",responseObject);
         
@@ -554,13 +555,19 @@
         //成功的回调
         NSLog(@"成功的回调==>%@",responseObject);
         
+        NSString *str = [[responseObject objectForKey:@"data"] objectForKey:@"created_time"];
+        
+        
+        NSLog(@"+++%@",str);
+        
         NSArray *dictArray = [responseObject objectForKey:@"data"];
         NSMutableArray *tempArray = [NSMutableArray array];
         
         for (NSDictionary *dict in dictArray) {
             
             PXZhiWei *ZhiWei = [PXZhiWei objectWithKeyValues:dict];
-             NSLog(@"++++%zd",ZhiWei.Id);
+            
+        
             
             
             [tempArray addObject:ZhiWei];
@@ -681,7 +688,7 @@
     int padding2 = 15;
     int padding3 = ([UIScreen mainScreen].bounds.size.width-222)/3;
     int padding4 = ([UIScreen mainScreen].bounds.size.height *(172/568));
-#warning TODO -高度
+
     //headerView约束
     [headerV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.view);
@@ -868,6 +875,9 @@
     return 8;
 }
 
+
+
+
 //自定义Cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -960,7 +970,10 @@
             cell = [[PXMainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mainID];
         }
         
+        
         cell.zhiWei = zhiWei;
+        
+
         
         return cell;
     }
@@ -1052,10 +1065,22 @@
 //点击cell事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+
     
     if ([tableView isEqual:_MainTableV]) {
+        
+        PXZhiWei *zhiwei = self.dataArray[indexPath.row];
+        
+        NSLog(@"hahaha%zd",zhiwei.pid);
+        
+        
+        
+        NSString *str = [NSString stringWithFormat:@"%zd",zhiwei.pid];
+        NSLog(@"+++%@",str);
+        
         PXDetailViewController *DetailVC = [[PXDetailViewController alloc]initWithStyle:UITableViewStyleGrouped];
+        
+//        DetailVC.pid = str;
         
         [self.navigationController pushViewController:DetailVC animated:YES];
         

@@ -71,16 +71,17 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="急" translatesAutoresizingMaskIntoConstraints="NO" id="s2F-cb-WSY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s2F-cb-WSY">
                     <rect key="frame" x="133" y="14" width="12" height="12"/>
-                    <color key="backgroundColor" red="0.0" green="0.52941176470588236" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="12" id="Nmw-OL-VqY"/>
                         <constraint firstAttribute="height" constant="12" id="yHq-BK-yqd"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="证" translatesAutoresizingMaskIntoConstraints="NO" id="AWb-cG-rSr">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AWb-cG-rSr">
                     <rect key="frame" x="154" y="14" width="12" height="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="12" id="T3O-Ib-7bp"/>
                         <constraint firstAttribute="width" constant="12" id="imt-pW-b5u"/>
@@ -123,8 +124,6 @@
         </view>
     </objects>
     <resources>
-        <image name="急" width="15" height="15"/>
         <image name="推荐奖励" width="26" height="12"/>
-        <image name="证" width="15" height="15"/>
     </resources>
 </document>

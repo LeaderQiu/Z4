@@ -13,6 +13,7 @@
 #import "PXSuccessViewController.h"
 #import "Masonry.h"
 #import "PXWanShanViewController.h"
+#import "PXMainViewController.h"
 
 
 
@@ -47,11 +48,9 @@
 //点击返回键
 -(void)BackClickBtn
 {
-//     PXDetailViewController *DetailVC = [[PXDetailViewController alloc]initWithStyle:UITableViewStyleGrouped];
-//    
-//        [self.navigationController popToViewController:DetailVC animated:YES];
+    PXDetailViewController *MainVC = [[PXDetailViewController alloc]init];
 
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController pushViewController:MainVC animated:YES];
 
 }
 

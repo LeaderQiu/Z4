@@ -212,7 +212,13 @@
 //忘记密码Btn点击
 -(void)WangjiBtnClick
 {
+    PXMiMaViewController2 *VC = [[PXMiMaViewController2 alloc]init];
+    
+    [self.navigationController pushViewController:VC animated:YES];
+    
     NSLog(@"点击了忘记密码");
+    
+    
 }
 
 

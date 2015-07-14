@@ -10,4 +10,6 @@
 
 @interface PXMiMaViewController3 : UIViewController
 
+@property(nonatomic,copy) NSString *Phonenumber;
+
 @end

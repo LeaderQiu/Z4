@@ -294,7 +294,7 @@
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"page":@"0",@"uid":@"1"};
+    NSDictionary *pamas = @{@"page":@"0",@"uid":@"2"};
     
     [mgr POST:UrlStrResumeList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //成功的回调
@@ -424,6 +424,9 @@
     
     NSLog(@"++++++++++++++++%zd", indexPath.row);
     
+    
+    
+    
     [_dataArray removeObjectAtIndex:indexPath.row];
     
     [_tableV deleteRowsAtIndexPaths:@[indexPath]  withRowAnimation:UITableViewRowAnimationRight];
@@ -433,6 +436,8 @@
     
     [_tableV reloadData];
 }
+
+
 
 //编辑按钮点击事件
 -(void)EditBtnClick
