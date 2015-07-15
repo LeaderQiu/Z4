@@ -58,7 +58,7 @@
                     <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="推荐奖励" translatesAutoresizingMaskIntoConstraints="NO" id="3Qs-Uy-VJP">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="推荐奖励" translatesAutoresizingMaskIntoConstraints="NO" id="3Qs-Uy-VJP">
                     <rect key="frame" x="290" y="42" width="26" height="12"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8K+" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlT-xn-6gR" userLabel="推荐奖励酬劳">
@@ -100,6 +100,7 @@
                 <constraint firstItem="gLd-wb-iSu" firstAttribute="top" secondItem="3WD-XP-svR" secondAttribute="bottom" constant="8" id="aId-cv-1Vo"/>
                 <constraint firstItem="AWb-cG-rSr" firstAttribute="leading" secondItem="s2F-cb-WSY" secondAttribute="trailing" constant="9" id="d23-UA-Eps"/>
                 <constraint firstItem="Vb2-m4-oy4" firstAttribute="top" secondItem="VSP-lO-nzl" secondAttribute="bottom" constant="37" id="dbC-pw-HbV"/>
+                <constraint firstItem="GRB-2H-eQC" firstAttribute="centerY" secondItem="3Qs-Uy-VJP" secondAttribute="centerY" constant="-0.5" id="exK-g2-Ral"/>
                 <constraint firstItem="Vb2-m4-oy4" firstAttribute="top" secondItem="s2F-cb-WSY" secondAttribute="bottom" constant="41" id="gib-dS-CCY"/>
                 <constraint firstItem="HlT-xn-6gR" firstAttribute="leading" secondItem="GRB-2H-eQC" secondAttribute="trailing" constant="3" id="ivQ-VF-bGs"/>
                 <constraint firstItem="s2F-cb-WSY" firstAttribute="leading" secondItem="3WD-XP-svR" secondAttribute="trailing" constant="8" id="oC2-Bb-3QT"/>

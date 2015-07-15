@@ -14,6 +14,10 @@
 #import "Masonry.h"
 #import "PXWanShanViewController.h"
 #import "PXMainViewController.h"
+#import "MJRefresh.h"
+#import "AFNetworking.h"
+#import "PXRuname.h"
+#import "MJExtension.h"
 
 
 
@@ -21,6 +25,10 @@
 
 @property(nonatomic,strong) UITextField *TextField;
 
+@property(nonatomic,assign) NSInteger pageNumber;
+
+/**存放的职位列表模型数组*/
+@property(nonatomic,strong) NSMutableArray *dataArray;
 
 @end
 
@@ -43,6 +51,17 @@
     [self setupTableV];
     
     
+}
+
+/**
+ *  懒加载
+ */
+-(NSMutableArray *)dataArray
+{
+    if (_dataArray == nil) {
+        _dataArray = [[NSMutableArray alloc]init];
+    }
+    return _dataArray;
 }
 
 //点击返回键
@@ -136,8 +155,110 @@
     self.tableView.dataSource = self;
     
     self.tableView.rowHeight = 49;
+    
+    //加入MJRefresh
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    
+    [self.tableView.header beginRefreshing];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    
+    
 }
 
+//下拉刷新loadNewData
+-(void)loadNewData
+{
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"page":@"0",@"uid":@"2"};
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeList" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //成功的回调
+        
+        NSArray *dict = [responseObject objectForKey:@"data"];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        for (NSDictionary *dictArray in dict) {
+            
+            PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
+            
+            [tempArray addObject:Runame];
+        }
+        
+        [self.dataArray addObjectsFromArray:tempArray];
+        
+        [self.tableView reloadData];
+        
+        NSLog(@"简历列表成功==>%@",responseObject);
+        
+        [self.tableView.header endRefreshing];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //失败的回调
+        
+        NSLog(@"简历列表失败==>%@",error);
+        
+        [self.tableView.header endRefreshing];
+    }];
+    
+    
+}
+
+//上拉刷新loadMoreData
+-(void)loadMoreData
+{
+
+    self.pageNumber +=1;
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"page":[NSString stringWithFormat:@"%zd",self.pageNumber],@"uid":@"2"};
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeList" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //成功的回调
+        
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        
+        if (code == 1000) {
+            NSArray *dict = [responseObject objectForKey:@"data"];
+            NSMutableArray *tempArray = [NSMutableArray array];
+            
+            for (NSDictionary *dictArray in dict) {
+                
+                PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
+                
+                [tempArray addObject:Runame];
+            }
+            
+            [self.dataArray addObjectsFromArray:tempArray];
+            
+            [self.tableView reloadData];
+            
+            NSLog(@"简历列表成功==>%@",responseObject);
+            
+            [self.tableView.footer endRefreshing];
+        }else {
+            
+            self.pageNumber -= 1;
+            
+            [self.tableView.footer noticeNoMoreData];
+        }
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //失败的回调
+        
+        NSLog(@"简历列表失败==>%@",error);
+        
+        self.pageNumber -= 1;
+        
+        [self.tableView.footer noticeNoMoreData];
+    }];
+    
+}
 
 #pragma mark - Table view data source
 

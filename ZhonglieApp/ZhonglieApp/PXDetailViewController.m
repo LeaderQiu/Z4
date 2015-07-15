@@ -18,6 +18,7 @@
 #import "PXPosition.h"
 #import "PXRequir.h"
 #import "MJExtension.h"
+#import "PXZhiWei.h"
 
 
 
@@ -110,10 +111,7 @@
         //
         NSLog(@"职位详情成功==》%@",responseObject);
         
-//        
-//        NSArray *dictArray = [responseObject objectForKey:@"data"];
-//
-//        NSLog(@"+++%@",dictArray);
+
         
         self.HuiBao = [[[responseObject objectForKey:@"data"] objectForKey:@"description"] objectForKey:@"ups"];
         
@@ -208,11 +206,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-   
 
-    
-    
-#warning TODO xib加载不成功
     if (indexPath.section == 0) {
         
         static NSString *mainID = @"PXMainCell";
@@ -224,6 +218,21 @@
         }
         
         return cell;
+        
+//        static NSString *mainID = @"PXMainCell";
+//        
+//        PXMainCell *cell = [tableView dequeueReusableCellWithIdentifier:mainID];
+//        
+//        PXZhiWei *zhiWei = self.dataArray[indexPath.row];
+//        
+//        if (cell == nil) {
+//            cell = [[PXMainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mainID];
+//        }
+//        
+//        
+//        cell.zhiWei = zhiWei;
+//        
+//        return cell;
     }
    
 
