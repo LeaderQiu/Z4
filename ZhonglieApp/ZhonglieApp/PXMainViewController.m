@@ -464,14 +464,14 @@
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"user_mobile":@"15911056241",
-                            @"user_passwd":@""
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"resume_id":@"624"
                                            
                                     };
     
     NSLog(@"接口测试的参数%@",pamas);
     
-    [mgr POST:@"http://123.57.147.235/index.php/home/user/userLogin" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeEdit" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         NSLog(@"接口测试成功==》%@",responseObject);
         
