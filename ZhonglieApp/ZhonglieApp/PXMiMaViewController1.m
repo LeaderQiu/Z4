@@ -12,6 +12,9 @@
 #import "Masonry.h"
 #import "UIColor+SYExtension.h"
 #import "PXUserViewController.h"
+#import "AFNetworking.h"
+#import "PXLogin.h"
+#import "MJExtension.h"
 
 
 @interface PXMiMaViewController1 ()<UITextFieldDelegate>
@@ -19,6 +22,9 @@
 @property(nonatomic,strong) UITextField *TextField1;
 
 @property(nonatomic,strong) UITextField *TextField2;
+
+/**存放的职位列表模型数组*/
+@property(nonatomic,strong) NSMutableArray *dataArray;
 @end
 
 @implementation PXMiMaViewController1
@@ -38,6 +44,15 @@
     [self setupData];
     
    
+}
+
+//懒加载
+-(NSMutableArray *)dataArray
+{
+    if (_dataArray == nil) {
+        _dataArray = [[NSMutableArray alloc]init];
+    }
+    return _dataArray;
 }
 
 -(void)setupData
@@ -228,6 +243,31 @@
 -(void)NextBtnClick
 {
     NSLog(@"点击了登录");
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"user_mobile":@"15911056241",@"user_passwd":@""};
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/user/userLogin" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSLog(@"帐号登录成功回调%@",responseObject);
+        
+        NSArray *dictArray = [responseObject objectForKey:@"data"];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        for (NSDictionary *dict in dictArray) {
+            
+            PXLogin *login = [PXLogin objectWithKeyValues:dict];
+            
+            [tempArray addObject:login];
+        }
+        
+        [self.dataArray addObjectsFromArray:tempArray];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"帐号登录失败回调%@",error);
+    }];
     
     PXUserViewController *VC = [[PXUserViewController alloc]init];
     

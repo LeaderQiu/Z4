@@ -98,6 +98,7 @@
 		FD8203371B32760700894743 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8203291B32760700894743 /* NSArray+MASAdditions.m */; };
 		FD8203381B32760700894743 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FD82032C1B32760700894743 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		FD8203391B32760700894743 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FD82032E1B32760700894743 /* View+MASAdditions.m */; };
+		FD97C7961B55F80700F7BA1E /* PXLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = FD97C7951B55F80700F7BA1E /* PXLogin.m */; };
 		FD991CAE1B2586C100E79F12 /* PXRuname2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD991CAC1B2586C100E79F12 /* PXRuname2Cell.m */; };
 		FD991CAF1B2586C100E79F12 /* PXRuname2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD991CAD1B2586C100E79F12 /* PXRuname2Cell.xib */; };
 		FD991CB31B258AC400E79F12 /* PXRunameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD991CB11B258AC400E79F12 /* PXRunameCell.m */; };
@@ -327,6 +328,8 @@
 		FD82032D1B32760700894743 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
 		FD82032E1B32760700894743 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
 		FD82032F1B32760700894743 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		FD97C7941B55F80700F7BA1E /* PXLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLogin.h; sourceTree = "<group>"; };
+		FD97C7951B55F80700F7BA1E /* PXLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLogin.m; sourceTree = "<group>"; };
 		FD991CAB1B2586C100E79F12 /* PXRuname2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXRuname2Cell.h; sourceTree = "<group>"; };
 		FD991CAC1B2586C100E79F12 /* PXRuname2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRuname2Cell.m; sourceTree = "<group>"; };
 		FD991CAD1B2586C100E79F12 /* PXRuname2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXRuname2Cell.xib; sourceTree = "<group>"; };
@@ -922,6 +925,8 @@
 		FDFDBCA71B2828F3001C360A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD97C7941B55F80700F7BA1E /* PXLogin.h */,
+				FD97C7951B55F80700F7BA1E /* PXLogin.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1125,6 +1130,7 @@
 				FD4518AD1B1EA15500A49D88 /* PXCityViewController.m in Sources */,
 				FD1B81F91B524E3800EF0993 /* UIScrollView+MJRefresh.m in Sources */,
 				FD8203101B32757A00894743 /* UIButton+WebCache.m in Sources */,
+				FD97C7961B55F80700F7BA1E /* PXLogin.m in Sources */,
 				FD1B81ED1B524E3800EF0993 /* MJRefreshAutoGifFooter.m in Sources */,
 				FDFDBCA51B26FE00001C360A /* PXHistoryCell.m in Sources */,
 				FD1B81F71B524E3800EF0993 /* MJRefreshConst.m in Sources */,
