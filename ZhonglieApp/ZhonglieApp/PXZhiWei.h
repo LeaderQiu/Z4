@@ -10,6 +10,8 @@
 
 @interface PXZhiWei : NSObject
 
+/** 职位id */
+@property (nonatomic,assign) int ID;
 /** 职位标题 */
 @property (nonatomic, copy) NSString *position_title;
 /** 职位状态 */
@@ -24,7 +26,6 @@
 @property (nonatomic, copy) NSString *position_reward;
 /** 职位诱惑 */
 @property (nonatomic, copy) NSString *position_advantage;
-/** 职位id */
-@property (nonatomic,assign) NSInteger pid;
+
 
 @end

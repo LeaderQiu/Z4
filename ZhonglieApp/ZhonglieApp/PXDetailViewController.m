@@ -66,7 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    [self setupHTTPData:_pid];
+    [self setupHTTPData:_pid];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

@@ -10,4 +10,8 @@
 
 @implementation PXZhiWei
 
++(NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
+}
+
 @end

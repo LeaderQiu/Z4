@@ -1065,16 +1065,16 @@
         
         PXZhiWei *zhiwei = self.dataArray[indexPath.row];
         
-        NSLog(@"hahaha%zd",zhiwei.pid);
+        NSLog(@"hahaha%zd",zhiwei.ID);
         
         
-        
-        NSString *str = [NSString stringWithFormat:@"%zd",zhiwei.pid];
+//        
+        NSString *str = [NSString stringWithFormat:@"%zd",zhiwei.ID];
         NSLog(@"+++%@",str);
         
         PXDetailViewController *DetailVC = [[PXDetailViewController alloc]initWithStyle:UITableViewStyleGrouped];
         
-//        DetailVC.pid = str;
+        DetailVC.pid = str;
         
         [self.navigationController pushViewController:DetailVC animated:YES];
         

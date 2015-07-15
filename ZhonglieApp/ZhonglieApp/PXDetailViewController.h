@@ -10,6 +10,6 @@
 
 @interface PXDetailViewController : UITableViewController
 
-
+@property(nonatomic,copy) NSString *pid;
 
 @end
